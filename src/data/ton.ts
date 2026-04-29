@@ -1,0 +1,222 @@
+export const tonNFTs = [
+  {
+    name: "Telegram Gifts NFT System",
+    chain: "TON",
+    category: "Utility",
+    supply: 0,
+    description: "NFT-based gifts integrated inside Telegram ecosystem",
+    knownFor: "Social gifting + collectible digital items",
+    year: 2023,
+    twitter: "https://x.com/telegram",
+    rarity: "legendary"
+  },
+  {
+    name: "TON Diamonds Gifts",
+    chain: "TON",
+    category: "Collectible",
+    supply: 0,
+    description: "Premium Telegram gift NFTs used as digital collectibles",
+    knownFor: "In-app Telegram collectible economy",
+    year: 2023,
+    twitter: "https://x.com/telegram",
+    rarity: "rare"
+  },
+  {
+    name: "TON Diamonds Collection Ecosystem",
+    chain: "TON",
+    category: "Collectible",
+    supply: 0,
+    description: "Telegram-native collectible NFT system",
+    knownFor: "Gift-based NFT trading inside Telegram",
+    year: 2024,
+    twitter: "https://x.com/telegram",
+    rarity: "rare"
+  },
+  {
+    name: "TON Punks",
+    chain: "TON",
+    category: "PFP",
+    supply: 10000,
+    description: "Punk-style NFT collection on TON blockchain",
+    knownFor: "Early TON PFP culture experiment",
+    year: 2022,
+    twitter: "https://x.com/ton_blockchain",
+    rarity: "rare"
+  },
+  {
+    name: "TON Ape Club",
+    chain: "TON",
+    category: "PFP",
+    supply: 10000,
+    description: "Ape-themed NFT collection on TON",
+    knownFor: "Community-driven TON identity NFTs",
+    year: 2023,
+    twitter: "https://x.com/ton_blockchain",
+    rarity: "rare"
+  },
+  {
+    name: "TON DNS NFT Domains",
+    chain: "TON",
+    category: "Identity",
+    supply: 0,
+    description: "NFT-based domain names on TON blockchain",
+    knownFor: "Web3 identity and naming system",
+    year: 2022,
+    twitter: "https://x.com/ton_blockchain",
+    rarity: "legendary"
+  },
+  {
+    name: "Fragment Username NFTs",
+    chain: "TON",
+    category: "Identity",
+    supply: 0,
+    description: "Telegram username NFTs sold via Fragment",
+    knownFor: "Social identity ownership on Telegram",
+    year: 2022,
+    twitter: "https://x.com/fragmentcom",
+    rarity: "legendary"
+  },
+  {
+    name: "TON NFTs Marketplace Ecosystem",
+    chain: "TON",
+    category: "Marketplace",
+    supply: 0,
+    description: "Aggregated NFT trading ecosystem on TON",
+    knownFor: "TON NFT trading infrastructure",
+    year: 2023,
+    twitter: "https://x.com/ton_blockchain",
+    rarity: "rare"
+  },
+  {
+    name: "Getgems NFT Platform Assets",
+    chain: "TON",
+    category: "Marketplace",
+    supply: 0,
+    description: "Main NFT marketplace on TON blockchain",
+    knownFor: "Primary TON NFT trading hub",
+    year: 2022,
+    twitter: "https://x.com/getgemsdotio",
+    rarity: "legendary"
+  },
+  {
+    name: "TON Mini App NFT Assets",
+    chain: "TON",
+    category: "GameFi",
+    supply: 0,
+    description: "NFTs used inside Telegram mini-app games",
+    knownFor: "Game-based NFT utility ecosystem",
+    year: 2023,
+    twitter: "https://x.com/ton_blockchain",
+    rarity: "rare"
+  },
+  {
+    name: "TON Space NFT Wallet Identity",
+    chain: "TON",
+    category: "Utility",
+    supply: 0,
+    description: "NFT-linked wallet identity system inside TON ecosystem",
+    knownFor: "Web3 identity layer for TON users",
+    year: 2023,
+    twitter: "https://x.com/ton_blockchain",
+    rarity: "rare"
+  },
+  {
+    name: "Tonkeeper NFT Integration Assets",
+    chain: "TON",
+    category: "Wallet Utility",
+    supply: 0,
+    description: "NFT display and management system inside Tonkeeper wallet",
+    knownFor: "Main TON wallet NFT support layer",
+    year: 2022,
+    twitter: "https://x.com/tonkeeper",
+    rarity: "rare"
+  },
+  {
+    name: "TON Collectibles (Telegram Stickers NFTs)",
+    chain: "TON",
+    category: "Collectible",
+    supply: 0,
+    description: "Sticker-based NFT collectibles inside Telegram ecosystem",
+    knownFor: "Social media NFT collectibles",
+    year: 2023,
+    twitter: "https://x.com/telegram",
+    rarity: "rare"
+  },
+  {
+    name: "Fragment NFT Auctions System",
+    chain: "TON",
+    category: "Marketplace",
+    supply: 0,
+    description: "Auction system for Telegram usernames and digital assets",
+    knownFor: "Identity trading marketplace",
+    year: 2022,
+    twitter: "https://x.com/fragmentcom",
+    rarity: "legendary"
+  },
+  {
+    name: "TON Proxy NFT Access Keys",
+    chain: "TON",
+    category: "Utility",
+    supply: 0,
+    description: "NFT-based access keys for proxy and private services",
+    knownFor: "Privacy and access control NFTs",
+    year: 2023,
+    twitter: "https://x.com/ton_blockchain",
+    rarity: "rare"
+  },
+  {
+    name: "TON DeFi NFT Rewards",
+    chain: "TON",
+    category: "DeFi",
+    supply: 0,
+    description: "NFT rewards issued for DeFi participation on TON",
+    knownFor: "Liquidity mining NFT incentives",
+    year: 2023,
+    twitter: "https://x.com/ton_blockchain",
+    rarity: "rare"
+  },
+  {
+    name: "TON GameFi Mini App NFTs",
+    chain: "TON",
+    category: "GameFi",
+    supply: 0,
+    description: "NFT assets used inside Telegram-based mini games",
+    knownFor: "Tap-to-earn and mini-game NFT economy",
+    year: 2024,
+    twitter: "https://x.com/ton_blockchain",
+    rarity: "rare"
+  },
+  {
+    name: "TON Proof-of-Participation NFTs",
+    chain: "TON",
+    category: "Utility",
+    supply: 0,
+    description: "NFT badges for ecosystem participation and events",
+    knownFor: "Community engagement rewards",
+    year: 2023,
+    twitter: "https://x.com/ton_blockchain",
+    rarity: "rare"
+  },
+  {
+    name: "TON Community Badge NFTs",
+    chain: "TON",
+    category: "Community",
+    supply: 0,
+    description: "NFT badges for TON community contributors",
+    knownFor: "Contributor recognition system",
+    year: 2023,
+    twitter: "https://x.com/ton_blockchain",
+    rarity: "rare"
+  },
+  {
+    name: "TON Ecosystem Partner NFTs",
+    chain: "TON",
+    category: "Utility",
+    supply: 0,
+    description: "NFT credentials for ecosystem partners and builders",
+    knownFor: "Developer and partner verification layer",
+    year: 2024,
+    twitter: "https://x.com/ton_blockchain",
+    rarity: "legendary"
+  }
+];

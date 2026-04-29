@@ -1,0 +1,222 @@
+export const arbitrumNFTs = [
+  {
+    name: "Smol Brains",
+    chain: "Arbitrum",
+    category: "PFP",
+    supply: 10000,
+    description: "Minimal pixel brain NFT collection",
+    knownFor: "Smol ecosystem identity NFTs",
+    year: 2021,
+    twitter: "https://x.com/smolbrains",
+    rarity: "rare"
+  },
+  {
+    name: "Smol Bodies",
+    chain: "Arbitrum",
+    category: "PFP",
+    supply: 10000,
+    description: "Body expansion of Smol ecosystem",
+    knownFor: "Composable Smol identity system",
+    year: 2022,
+    twitter: "https://x.com/smolbrains",
+    rarity: "rare"
+  },
+  {
+    name: "GMX Avatars",
+    chain: "Arbitrum",
+    category: "Utility",
+    supply: 0,
+    description: "DeFi ecosystem NFT identity avatars",
+    knownFor: "GMX trading ecosystem identity layer",
+    year: 2022,
+    twitter: "https://x.com/gmx_io",
+    rarity: "rare"
+  },
+  {
+    name: "Treasure DAO Loot",
+    chain: "Arbitrum",
+    category: "Game",
+    supply: 8000,
+    description: "Magic internet ecosystem NFT assets",
+    knownFor: "Arbitrum gaming ecosystem foundation",
+    year: 2021,
+    twitter: "https://x.com/Treasure_DAO",
+    rarity: "legendary"
+  },
+  {
+    name: "Bridgeworld Relics",
+    chain: "Arbitrum",
+    category: "Game",
+    supply: 10000,
+    description: "In-game NFT assets for Bridgeworld",
+    knownFor: "Treasure DAO gaming economy",
+    year: 2022,
+    twitter: "https://x.com/Treasure_DAO",
+    rarity: "rare"
+  },
+  {
+    name: "Legions Genesis",
+    chain: "Arbitrum",
+    category: "Game",
+    supply: 10000,
+    description: "RPG-style NFT warrior collection",
+    knownFor: "Treasure ecosystem battle NFTs",
+    year: 2022,
+    twitter: "https://x.com/Treasure_DAO",
+    rarity: "rare"
+  },
+  {
+    name: "Magicians DAO",
+    chain: "Arbitrum",
+    category: "PFP",
+    supply: 9999,
+    description: "Wizard-themed NFT identity collection",
+    knownFor: "Magic ecosystem NFT culture",
+    year: 2022,
+    twitter: "https://x.com/Treasure_DAO",
+    rarity: "rare"
+  },
+  {
+    name: "ArbiPunks",
+    chain: "Arbitrum",
+    category: "PFP",
+    supply: 10000,
+    description: "Pixel punk-style NFT collection on Arbitrum",
+    knownFor: "Ethereum punk-inspired L2 NFTs",
+    year: 2021,
+    twitter: "https://x.com/arbipunks",
+    rarity: "rare"
+  },
+  {
+    name: "Rari DAO Vault NFTs",
+    chain: "Arbitrum",
+    category: "DAO",
+    supply: 0,
+    description: "Governance NFT access layer",
+    knownFor: "Rari ecosystem governance assets",
+    year: 2022,
+    twitter: "https://x.com/RariCapital",
+    rarity: "rare"
+  },
+  {
+    name: "Dopex Receipts",
+    chain: "Arbitrum",
+    category: "DeFi",
+    supply: 0,
+    description: "Options protocol NFT receipts",
+    knownFor: "DeFi derivatives ecosystem",
+    year: 2022,
+    twitter: "https://x.com/dopex_io",
+    rarity: "rare"
+  },
+  {
+    name: "Jones DAO NFTs",
+    chain: "Arbitrum",
+    category: "DeFi",
+    supply: 0,
+    description: "Yield strategy NFT positions",
+    knownFor: "Arbitrum yield vault ecosystem",
+    year: 2022,
+    twitter: "https://x.com/JonesDAO",
+    rarity: "rare"
+  },
+  {
+    name: "PlutusDAO NFTs",
+    chain: "Arbitrum",
+    category: "DeFi",
+    supply: 0,
+    description: "Governance and ve-token NFTs",
+    knownFor: "Liquidity governance boosting",
+    year: 2022,
+    twitter: "https://x.com/PlutusDAO",
+    rarity: "rare"
+  },
+  {
+    name: "Radiant Capital Positions",
+    chain: "Arbitrum",
+    category: "DeFi",
+    supply: 0,
+    description: "Lending position NFTs",
+    knownFor: "Cross-chain lending protocol",
+    year: 2022,
+    twitter: "https://x.com/RadiantCapital",
+    rarity: "rare"
+  },
+  {
+    name: "Camelot Genesis",
+    chain: "Arbitrum",
+    category: "DeFi",
+    supply: 10000,
+    description: "DEX ecosystem NFT membership",
+    knownFor: "Camelot DEX identity layer",
+    year: 2022,
+    twitter: "https://x.com/CamelotDEX",
+    rarity: "rare"
+  },
+  {
+    name: "Ramses Exchange NFTs",
+    chain: "Arbitrum",
+    category: "DeFi",
+    supply: 0,
+    description: "Liquidity and governance NFTs",
+    knownFor: "Arbitrum veDEX ecosystem",
+    year: 2023,
+    twitter: "https://x.com/RamsesExchange",
+    rarity: "rare"
+  },
+  {
+    name: "Vesta Finance Positions",
+    chain: "Arbitrum",
+    category: "DeFi",
+    supply: 0,
+    description: "Collateral debt position NFTs",
+    knownFor: "Stable borrowing protocol",
+    year: 2022,
+    twitter: "https://x.com/VestaFinance",
+    rarity: "rare"
+  },
+  {
+    name: "ArbiGoblins",
+    chain: "Arbitrum",
+    category: "PFP",
+    supply: 8888,
+    description: "Goblin meme NFT collection",
+    knownFor: "Community meme identity NFTs",
+    year: 2022,
+    twitter: "https://x.com/arbigoblins",
+    rarity: "rare"
+  },
+  {
+    name: "Nova NFT Pass",
+    chain: "Arbitrum",
+    category: "Utility",
+    supply: 5000,
+    description: "Access pass NFT for Arbitrum apps",
+    knownFor: "Utility access layer NFTs",
+    year: 2023,
+    twitter: "https://x.com/Arbitrum",
+    rarity: "rare"
+  },
+  {
+    name: "Arbitrum Odyssey Badge",
+    chain: "Arbitrum",
+    category: "Badge",
+    supply: 100000,
+    description: "Community participation NFT badge",
+    knownFor: "Arbitrum ecosystem engagement campaign",
+    year: 2022,
+    twitter: "https://x.com/Arbitrum",
+    rarity: "legendary"
+  },
+  {
+    name: "Stylus Pioneer NFTs",
+    chain: "Arbitrum",
+    category: "Badge",
+    supply: 0,
+    description: "Developer participation NFT badge",
+    knownFor: "Arbitrum Stylus ecosystem",
+    year: 2023,
+    twitter: "https://x.com/Arbitrum",
+    rarity: "rare"
+  }
+];

@@ -1,0 +1,132 @@
+"use client";
+
+import { useState } from "react";
+import { allNFTs } from "@/data"; // ✅ FIXED IMPORT
+import NFTModal from "./NFTModal";
+
+type NFT = {
+  id?: string;
+  name: string;
+  chain: string;
+  category: string;
+  supply: number;
+  description: string;
+  knownFor: string;
+  year: number;
+  twitter: string;
+  rarity?: string;
+};
+
+type Props = {
+  selected: string;
+  search: string;
+  dark: boolean;
+};
+
+// format supply (10000 → 10K)
+function formatSupply(num: number) {
+  if (!num) return "-";
+  if (num >= 1000000) return (num / 1000000).toFixed(1) + "M";
+  if (num >= 1000) return (num / 1000).toFixed(1) + "K";
+  return num.toString();
+}
+
+export default function NFTTable({ selected, search, dark }: Props) {
+  const nfts = allNFTs as NFT[]; // ✅ USING NEW DATA SOURCE
+
+  const [selectedNFT, setSelectedNFT] = useState<NFT | null>(null);
+
+  // 🔍 FILTER LOGIC
+  const filtered = nfts
+    .filter((nft) =>
+      selected === "All Chains" ? true : nft.chain === selected
+    )
+    .filter((nft) =>
+      nft.name.toLowerCase().includes(search.toLowerCase())
+    );
+
+  return (
+    <>
+      {/* TABLE WRAPPER */}
+      <div className="overflow-x-auto mt-6">
+        <table className="w-full text-sm">
+
+          {/* HEADER */}
+          <thead
+            className={`border-b ${
+              dark
+                ? "text-gray-400 border-white/10"
+                : "text-gray-600 border-black/10"
+            }`}
+          >
+            <tr className="text-left">
+              <th className="py-3">#</th>
+              <th className="py-3">Name</th>
+              <th className="py-3">Chain</th>
+              <th className="py-3">Supply</th>
+              <th className="py-3">Year</th>
+            </tr>
+          </thead>
+
+          {/* BODY */}
+          <tbody>
+            {filtered.length === 0 ? (
+              <tr>
+                <td colSpan={5} className="text-center py-8 opacity-60">
+                  No NFTs found
+                </td>
+              </tr>
+            ) : (
+              filtered.map((nft, index) => (
+                <tr
+                  key={nft.id || `${nft.name}-${index}`} // ✅ BETTER KEY
+                  onClick={() => setSelectedNFT(nft)}
+                  className={`cursor-pointer border-b transition ${
+                    dark
+                      ? "border-white/5 hover:bg-white/5"
+                      : "border-black/5 hover:bg-black/5"
+                  }`}
+                >
+                  {/* INDEX */}
+                  <td className="py-4">{index + 1}</td>
+
+                  {/* NAME */}
+                  <td className="py-4 font-medium pr-24">
+                    {nft.name}
+                  </td>
+
+                  {/* CHAIN */}
+                  <td className="py-4">{nft.chain}</td>
+
+                  {/* SUPPLY */}
+                  <td className="py-4">
+                    <span
+                      className={`px-2 py-1 rounded-md text-xs ${
+                        dark
+                          ? "bg-green-500/10 text-green-400"
+                          : "bg-green-500/10 text-green-600"
+                      }`}
+                    >
+                      {formatSupply(nft.supply)}
+                    </span>
+                  </td>
+
+                  {/* YEAR */}
+                  <td className="py-4">{nft.year || "-"}</td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      {/* 🧠 MODAL */}
+      <NFTModal
+        nft={selectedNFT}
+        open={!!selectedNFT}
+        onClose={() => setSelectedNFT(null)}
+        dark={dark}
+      />
+    </>
+  );
+}

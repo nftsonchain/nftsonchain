@@ -1,0 +1,222 @@
+export const nearNFTs = [
+  {
+    name: "Paras NFT Collection",
+    chain: "NEAR",
+    category: "Marketplace",
+    supply: 0,
+    description: "Digital art and collectibles marketplace on NEAR",
+    knownFor: "Primary NFT hub on NEAR ecosystem",
+    year: 2021,
+    twitter: "https://x.com/ParasHQ",
+    rarity: "legendary"
+  },
+  {
+    name: "Mintbase Store NFTs",
+    chain: "NEAR",
+    category: "Marketplace",
+    supply: 0,
+    description: "NFT storefront infrastructure on NEAR",
+    knownFor: "Open NFT minting and store creation",
+    year: 2021,
+    twitter: "https://x.com/mintbase",
+    rarity: "legendary"
+  },
+  {
+    name: "NEAR Punks",
+    chain: "NEAR",
+    category: "PFP",
+    supply: 10000,
+    description: "Pixel punk-inspired NFT collection on NEAR",
+    knownFor: "Early NFT identity project on NEAR",
+    year: 2021,
+    twitter: "https://x.com/nearpunks",
+    rarity: "rare"
+  },
+  {
+    name: "Shroom Kingdom NFTs",
+    chain: "NEAR",
+    category: "Game",
+    supply: 0,
+    description: "NFT-based farming and gaming ecosystem",
+    knownFor: "Play-to-earn on NEAR",
+    year: 2022,
+    twitter: "https://x.com/ShroomKingdom",
+    rarity: "rare"
+  },
+  {
+    name: "Few and Far NFTs",
+    chain: "NEAR",
+    category: "Marketplace",
+    supply: 0,
+    description: "NFT marketplace and launchpad on NEAR",
+    knownFor: "Creator-focused NFT platform",
+    year: 2022,
+    twitter: "https://x.com/fewandfar",
+    rarity: "rare"
+  },
+  {
+    name: "Secret Skellies Society",
+    chain: "NEAR",
+    category: "PFP",
+    supply: 3333,
+    description: "Skeleton-themed NFT avatars",
+    knownFor: "Stylized art and tight-knit community",
+    year: 2022,
+    twitter: "https://x.com/skelliesnft",
+    rarity: "rare"
+  },
+  {
+    name: "Near Monkeys",
+    chain: "NEAR",
+    category: "PFP",
+    supply: 5000,
+    description: "Monkey-themed NFT avatars on NEAR",
+    knownFor: "Community NFT culture",
+    year: 2022,
+    twitter: "https://x.com/nearmonkeys",
+    rarity: "rare"
+  },
+  {
+    name: "Astro Bulls",
+    chain: "NEAR",
+    category: "PFP",
+    supply: 4444,
+    description: "Bull-themed NFT avatars in NEAR ecosystem",
+    knownFor: "Community-driven NFT branding",
+    year: 2022,
+    twitter: "https://x.com/AstroBullsNFT",
+    rarity: "rare"
+  },
+  {
+    name: "Nearnauts",
+    chain: "NEAR",
+    category: "PFP",
+    supply: 7777,
+    description: "Space explorer-themed NFT avatars",
+    knownFor: "Sci-fi NFT identity on NEAR",
+    year: 2022,
+    twitter: "https://x.com/nearnauts",
+    rarity: "rare"
+  },
+  {
+    name: "Meta Yacht Club NEAR",
+    chain: "NEAR",
+    category: "PFP",
+    supply: 8888,
+    description: "Luxury yacht-inspired NFT club",
+    knownFor: "Lifestyle NFT branding",
+    year: 2022,
+    twitter: "https://x.com/metayachtclub",
+    rarity: "rare"
+  },
+  {
+  name: "Near Tigers",
+  chain: "NEAR",
+  category: "PFP",
+  supply: 5000,
+  description: "Tiger-themed NFT avatars within NEAR ecosystem",
+  knownFor: "Community-driven PFP identity",
+  year: 2022,
+  twitter: "https://x.com/neartigers",
+  rarity: "rare"
+},
+{
+  name: "Near Wolves",
+  chain: "NEAR",
+  category: "PFP",
+  supply: 4000,
+  description: "Wolf-themed NFT collection on NEAR",
+  knownFor: "Pack-style community NFTs",
+  year: 2022,
+  twitter: "https://x.com/nearwolves",
+  rarity: "rare"
+},
+{
+  name: "Near Pirates",
+  chain: "NEAR",
+  category: "PFP",
+  supply: 3500,
+  description: "Pirate-themed NFT avatars",
+  knownFor: "Adventure-style NFT branding",
+  year: 2022,
+  twitter: "https://x.com/nearpirates",
+  rarity: "rare"
+},
+{
+  name: "Near Foxes",
+  chain: "NEAR",
+  category: "PFP",
+  supply: 3000,
+  description: "Fox-themed NFT characters on NEAR",
+  knownFor: "Stylized digital avatar collection",
+  year: 2022,
+  twitter: "https://x.com/nearfoxes",
+  rarity: "rare"
+},
+{
+  name: "Near Samurai",
+  chain: "NEAR",
+  category: "PFP",
+  supply: 2500,
+  description: "Samurai-themed NFT avatars",
+  knownFor: "Japanese-inspired NFT art",
+  year: 2022,
+  twitter: "https://x.com/nearsamurai",
+  rarity: "rare"
+},
+{
+  name: "Near Ninjas",
+  chain: "NEAR",
+  category: "PFP",
+  supply: 2500,
+  description: "Stealth ninja NFT avatars",
+  knownFor: "Anime-style NFT identity",
+  year: 2022,
+  twitter: "https://x.com/nearninjas",
+  rarity: "rare"
+},
+{
+  name: "Near Dragons",
+  chain: "NEAR",
+  category: "GameFi",
+  supply: 0,
+  description: "Dragon-themed NFT assets for gaming ecosystems",
+  knownFor: "Fantasy NFT game integrations",
+  year: 2022,
+  twitter: "https://x.com/neardragons",
+  rarity: "rare"
+},
+{
+  name: "Near Vikings",
+  chain: "NEAR",
+  category: "PFP",
+  supply: 3200,
+  description: "Viking warrior NFT avatars",
+  knownFor: "Mythology-based NFT collection",
+  year: 2022,
+  twitter: "https://x.com/nearvikings",
+  rarity: "rare"
+},
+{
+  name: "Near Robots",
+  chain: "NEAR",
+  category: "PFP",
+  supply: 3600,
+  description: "Futuristic robot NFT avatars",
+  knownFor: "Sci-fi NFT art direction",
+  year: 2022,
+  twitter: "https://x.com/nearrobots",
+  rarity: "rare"
+},
+{
+  name: "Near Legends",
+  chain: "NEAR",
+  category: "Collectible",
+  supply: 0,
+  description: "Mixed character NFT collection",
+  knownFor: "Community storytelling NFTs",
+  year: 2022,
+  twitter: "https://x.com/nearlegends",
+  rarity: "rare"
+}
+];

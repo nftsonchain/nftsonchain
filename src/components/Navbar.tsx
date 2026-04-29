@@ -1,0 +1,91 @@
+"use client";
+
+import { Search, MoreVertical, Sun, Moon } from "lucide-react";
+
+type Props = {
+  onMenuClick: () => void;
+  search: string;
+  setSearch: (value: string) => void;
+  dark: boolean;
+  setDark: (value: boolean | ((prev: boolean) => boolean)) => void;
+};
+
+export default function Navbar({
+  onMenuClick,
+  search,
+  setSearch,
+  dark,
+  setDark,
+}: Props) {
+  return (
+    <div
+      className={`w-full border-b sticky top-0 z-50 backdrop-blur-lg
+      ${
+        dark
+          ? "bg-black/60 border-white/10 text-white"
+          : "bg-gray-200 border-black/10 text-black"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+
+        {/* LEFT */}
+        <div className="flex items-center gap-4">
+
+          {/* TOGGLE SWITCH */}
+          <button
+            onClick={() => setDark((prev) => !prev)}
+            className={`w-14 h-7 flex items-center rounded-full p-1 transition
+              ${dark ? "bg-[#00F20A]" : "bg-gray-400"}`}
+          >
+            <div
+              className={`w-5 h-5 bg-white rounded-full shadow-md transform transition flex items-center justify-center
+                ${dark ? "translate-x-7" : "translate-x-0"}`}
+            >
+              {dark ? (
+                <Sun className="w-3 h-3 text-black" />
+              ) : (
+                <Moon className="w-3 h-3 text-black" />
+              )}
+            </div>
+          </button>
+
+          {/* LOGO */}
+          <h1 className="font-bold text-lg text-[#00F20A]">
+            NFTs OnChain <span className="text-[#00F20A]">◉</span>
+          </h1>
+        </div>
+
+        {/* RIGHT */}
+        <div className="flex items-center gap-4">
+
+          {/* SEARCH */}
+          <div className="relative">
+            <Search
+              className={`absolute left-3 top-2.5 w-4 h-4 ${
+                dark ? "text-gray-400" : "text-gray-600"
+              }`}
+            />
+            <input
+              type="text"
+              placeholder="Search NFTs..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className={`pl-9 pr-3 py-2 rounded-lg text-sm focus:outline-none border
+                ${
+                  dark
+                    ? "bg-white/5 border-white/10 text-white"
+                    : "bg-white border-black/20 text-black"
+                }`}
+            />
+          </div>
+
+          {/* MENU */}
+          <button onClick={onMenuClick}>
+            <MoreVertical className="w-5 h-5" />
+          </button>
+
+        </div>
+      </div>
+    </div>
+  );
+}
