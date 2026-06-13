@@ -65,7 +65,7 @@ const iconClass = "w-6 h-6 cursor-pointer transition hover:scale-110";
 function XIcon() {
   return (
     <img
-      src="https://img.icons8.com/fluency/48/x.png"
+      src="https://tse1.mm.bing.net/th/id/OIP.-Exflwn3hLKV2qJuY6mA7wHaHa?cb=thfc1falcon2&rs=1&pid=ImgDetMain&o=7&rm=3"
       alt="X"
       className={iconClass}
       loading="lazy"
