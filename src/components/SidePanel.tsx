@@ -33,8 +33,8 @@ function Section({ title, children, active, toggle, dark }: SectionProps) {
 
   return (
     <div
-      className={`border-b pb-2 ${
-        dark ? "border-white/10" : "border-black/10"
+      className={`border-b pb-2 backdrop-blur-xl ${
+        dark ? "border-white/10 bg-white/5" : "border-black/10 bg-black/5"
       }`}
     >
       <button
@@ -65,7 +65,7 @@ const iconClass = "w-6 h-6 cursor-pointer transition hover:scale-110";
 function XIcon() {
   return (
     <img
-      src="https://tse1.mm.bing.net/th/id/OIP.-Exflwn3hLKV2qJuY6mA7wHaHa?cb=thfc1falcon2&rs=1&pid=ImgDetMain&o=7&rm=3"
+      src="https://sl.bing.net/c4Puknh5iQS"
       alt="X"
       className={iconClass}
       loading="lazy"
@@ -160,10 +160,9 @@ export default function SidePanel({ open, onClose, dark }: Props) {
 
       {/* PANEL */}
       <div
-        className={`fixed top-0 right-0 h-full w-80 z-50 transform transition-transform duration-300
+        className={`fixed top-0 right-0 h-full w-80 z-50 transform transition-transform duration-300 backdrop-blur-3xl shadow-[0_30px_90px_-35px_rgba(0,0,0,0.75)]
         ${open ? "translate-x-0" : "translate-x-full"}
-        ${dark ? "bg-[#0B0F1A] text-white" : "bg-white text-black"}
-        border-l ${dark ? "border-white/10" : "border-black/10"}`}
+        ${dark ? "bg-black/50 text-white border-white/10" : "bg-white/70 text-black border-black/10"} border-l`}
       >
         <div className="p-5 space-y-4">
 
@@ -187,7 +186,7 @@ export default function SidePanel({ open, onClose, dark }: Props) {
           </Section>
 
           {/* SOCIALS */}
-          <div className="pt-4 border-t border-white/10">
+          <div className={`pt-4 border-t ${dark ? "border-white/10" : "border-black/10"}`}>
             <div className="flex flex-wrap gap-4 items-center">
 
               <a href="https://x.com/nfts_onchain?s=21" target="_blank"><XIcon /></a>

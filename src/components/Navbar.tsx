@@ -19,11 +19,11 @@ export default function Navbar({
 }: Props) {
   return (
     <div
-      className={`w-full border-b sticky top-0 z-50 backdrop-blur-lg
+      className={`w-full border-b sticky top-0 z-50 backdrop-blur-3xl shadow-[0_20px_60px_-40px_rgba(0,0,0,0.65)] transition-all
       ${
         dark
-          ? "bg-black/60 border-white/10 text-white"
-          : "bg-gray-200 border-black/10 text-black"
+          ? "bg-black/40 border-white/10 text-white"
+          : "bg-white/70 border-black/10 text-black"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -74,7 +74,7 @@ export default function Navbar({
               className={`pl-9 pr-3 py-2 rounded-lg text-sm focus:outline-none border
                 ${
                   dark
-                    ? "bg-white/5 border-white/10 text-white"
+                    ? "bg-white/10 border-white/10 text-white backdrop-blur-sm"
                     : "bg-white border-black/20 text-black"
                 }`}
             />

@@ -39,7 +39,11 @@ export default function NFTTable({ selectedChains, search, dark }: Props) {
   return (
     <>
       {/* TABLE WRAPPER */}
-      <div className="overflow-x-auto mt-6">
+      <div className={`overflow-x-auto mt-6 rounded-[32px] border px-4 py-3 ${
+        dark
+          ? "bg-white/5 border-white/10 shadow-sm shadow-black/20"
+          : "bg-black/5 border-black/10 shadow-sm shadow-black/10"
+      }`}>
         <table className="w-full text-sm">
 
           {/* HEADER */}

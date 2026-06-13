@@ -125,9 +125,11 @@ export default function Marketplaces({ dark }: Props) {
             href={m.url}
             target="_blank"
             rel="noopener noreferrer"
-            className={`px-4 py-2 rounded-lg text-sm font-medium text-white
-            ${m.color}
-            hover:scale-105 transition`}
+            className={`px-4 py-2 rounded-2xl text-sm font-medium text-white border backdrop-blur-sm shadow-sm transition transform hover:scale-105 ${m.color} bg-opacity-60 ${
+              dark
+                ? "border-white/10 shadow-black/20"
+                : "border-black/10 shadow-black/10"
+            }`}
           >
             {m.name}
           </a>

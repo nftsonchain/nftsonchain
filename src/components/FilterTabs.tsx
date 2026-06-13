@@ -142,7 +142,7 @@ export default function FilterTabs({
         <button
           type="button"
           onClick={() => setIsOpen((open) => !open)}
-          className={`flex flex-1 min-w-0 items-center justify-between gap-3 rounded-[32px] border px-4 py-3 shadow-sm shadow-black/20 transition ${
+          className={`flex flex-1 min-w-0 items-center justify-between gap-3 rounded-[32px] border px-4 py-3 shadow-2xl shadow-black/30 transition backdrop-blur-2xl ${
             dark
               ? "border-white/10 bg-[#111827]/90"
               : "border-black/10 bg-white"
@@ -212,14 +212,16 @@ export default function FilterTabs({
       {isOpen && (
         <div
           ref={panelRef}
-            className={`absolute left-0 top-full z-20 mt-4 w-full rounded-[32px] border p-4 shadow-2xl shadow-black/40 backdrop-blur-xl sm:w-[32rem] ${
+            className={`absolute left-0 top-full z-20 mt-4 w-full rounded-[32px] border p-4 shadow-2xl shadow-black/40 backdrop-blur-3xl sm:w-[32rem] ${
               dark
-                ? "border-white/10 bg-[#08101f]/95"
-                : "border-black/10 bg-white/95"
+                ? "border-white/10 bg-[#08101f]/85"
+                : "border-black/10 bg-white/70"
             }`}
         >
           <div className="flex flex-col gap-4">
-            <div className="rounded-3xl border border-white/10 bg-white/5 px-4 py-3">
+            <div className={`rounded-3xl border px-4 py-3 backdrop-blur-xl ${
+              dark ? "border-white/10 bg-white/10" : "border-black/10 bg-black/10"
+            }`}>
               <label htmlFor="chain-search" className="sr-only">
                 Search chains
               </label>
@@ -236,7 +238,7 @@ export default function FilterTabs({
             </div>
 
             <div className={`flex items-center justify-between gap-4 rounded-3xl border px-4 py-3 text-sm ${
-              dark ? "border-white/10 bg-white/5 text-gray-300" : "border-black/10 bg-black/5 text-gray-700"
+              dark ? "border-white/10 bg-white/10 text-gray-300" : "border-black/10 bg-black/10 text-gray-700"
             }`}>
               <p className={`font-medium ${dark ? "text-white" : "text-black"}`}>Filter options</p>
               <p className="text-xs text-gray-400">
@@ -244,8 +246,8 @@ export default function FilterTabs({
               </p>
             </div>
 
-            <div className={`max-h-[320px] overflow-y-auto rounded-3xl border p-3 ${
-              dark ? "border-white/10 bg-white/5" : "border-black/10 bg-black/5"
+            <div className={`max-h-[320px] overflow-y-auto rounded-3xl border p-3 backdrop-blur-xl ${
+              dark ? "border-white/10 bg-white/10" : "border-black/10 bg-black/10"
             }`}>
               <div className="grid gap-2">
                 {filteredChains.map((chain) => {
@@ -262,8 +264,8 @@ export default function FilterTabs({
                         checked
                           ? "bg-[#FFCC00]/10 text-white"
                           : dark
-                          ? "bg-transparent text-gray-200 hover:bg-white/10"
-                          : "bg-transparent text-black/80 hover:bg-black/10"
+                          ? "bg-white/5 text-gray-200 hover:bg-white/10"
+                          : "bg-black/5 text-black/80 hover:bg-black/10"
                       }`}
                     >
                       <span>{chain}</span>
