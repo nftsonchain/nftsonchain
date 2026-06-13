@@ -53,7 +53,7 @@ export default function Navbar({
           </button>
 
           {/* SITE ICON */}
-          <div className="w-9 h-9 rounded-full overflow-hidden border border-black/10 bg-white shadow-sm">
+          <div className="w-7 h-7 md:w-9 md:h-9 rounded-full overflow-hidden border border-black/10 bg-white shadow-sm flex-shrink-0">
             <Image
               src={logoImage}
               alt="NFTs OnChain logo"
@@ -64,7 +64,7 @@ export default function Navbar({
           </div>
 
           {/* LOGO */}
-          <h1 className="font-bold text-lg text-[#FFCC00]">
+          <h1 className="hidden sm:block font-bold text-sm md:text-lg text-[#FFCC00]">
             NFTs OnChain <span className="text-[#FFCC00]">◉</span>
           </h1>
         </div>
