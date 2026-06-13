@@ -35,7 +35,7 @@ export default function Navbar({
           <button
             onClick={() => setDark((prev) => !prev)}
             className={`w-14 h-7 flex items-center rounded-full p-1 overflow-hidden transition
-              ${dark ? "bg-[#00F20A]" : "bg-gray-400"}`}
+              ${dark ? "bg-[#FFCC00]" : "bg-gray-400"}`}
           >
             <div
               className={`w-5 h-5 bg-white rounded-full shadow-md transition-all flex items-center justify-center ${
@@ -51,8 +51,8 @@ export default function Navbar({
           </button>
 
           {/* LOGO */}
-          <h1 className="font-bold text-lg text-[#00F20A]">
-            NFTs OnChain <span className="text-[#00F20A]">◉</span>
+          <h1 className="font-bold text-lg text-[#FFCC00]">
+            NFTs OnChain <span className="text-[#FFCC00]">◉</span>
           </h1>
         </div>
 
