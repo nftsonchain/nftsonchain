@@ -119,7 +119,7 @@ export default function FilterTabs({
   useEffect(() => {
     if (!focusChain) return;
     // open panel and pre-fill search to focus the given chain
-    setSearchTerm(focusChain);
+    setSearchTerm(focusChain ?? "");
     setIsOpen(true);
     // let the panel render then try to scroll the target into view
     setTimeout(() => {
