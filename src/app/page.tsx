@@ -11,7 +11,7 @@ import SidePanel from "@/components/SidePanel";
 import BackToTop from "@/components/BackToTop";
 
 export default function Home() {
-  const [selected, setSelected] = useState("All Chains");
+  const [selectedChains, setSelectedChains] = useState<string[]>(["All Chains"]);
   const [menuOpen, setMenuOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [dark, setDark] = useState(true);
@@ -49,13 +49,13 @@ export default function Home() {
 
         {/* 🔘 FILTER TABS */}
         <FilterTabs
-          selected={selected}
-          setSelected={setSelected}
+          selectedChains={selectedChains}
+          setSelectedChains={setSelectedChains}
         />
 
         {/* 📊 NFT TABLE */}
         <NFTTable
-          selected={selected}
+          selectedChains={selectedChains}
           search={search}
           dark={dark}
         />

@@ -6,7 +6,7 @@ import type { NFT } from "@/data/types";
 import NFTModal from "./NFTModal";
 
 type Props = {
-  selected: string;
+  selectedChains: string[];
   search: string;
   dark: boolean;
 };
@@ -19,15 +19,18 @@ function formatSupply(num: number) {
   return num.toString();
 }
 
-export default function NFTTable({ selected, search, dark }: Props) {
+export default function NFTTable({ selectedChains, search, dark }: Props) {
   const nfts = allNFTs as NFT[]; // ✅ USING NEW DATA SOURCE
 
   const [selectedNFT, setSelectedNFT] = useState<NFT | null>(null);
 
+  const filteringAllChains =
+    selectedChains.length === 0 || selectedChains.includes("All Chains");
+
   // 🔍 FILTER LOGIC
   const filtered = nfts
     .filter((nft) =>
-      selected === "All Chains" ? true : nft.chain === selected
+      filteringAllChains ? true : selectedChains.includes(nft.chain)
     )
     .filter((nft) =>
       nft.name.toLowerCase().includes(search.toLowerCase())
