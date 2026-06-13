@@ -54,6 +54,7 @@ export default function Home() {
           setSelectedChains={setSelectedChains}
           focusChain={focusChain}
           onFocusHandled={() => setFocusChain(null)}
+          dark={dark}
         />
 
         {/* Active filter chips */}

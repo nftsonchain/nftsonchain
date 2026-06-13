@@ -55,12 +55,14 @@ export default function FilterTabs({
   focusChain,
   onFocusHandled,
   autoCloseOnSelect = true,
+  dark = true,
 }: {
   selectedChains: string[];
   setSelectedChains: Dispatch<SetStateAction<string[]>>;
   focusChain?: string | null;
   onFocusHandled?: () => void;
   autoCloseOnSelect?: boolean;
+  dark?: boolean;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -140,10 +142,14 @@ export default function FilterTabs({
         <button
           type="button"
           onClick={() => setIsOpen((open) => !open)}
-          className="flex flex-1 min-w-0 items-center justify-between gap-3 rounded-[32px] border border-white/10 bg-[#111827]/90 px-4 py-3 shadow-sm shadow-black/20 transition hover:border-green-400/40"
+          className={`flex flex-1 min-w-0 items-center justify-between gap-3 rounded-[32px] border px-4 py-3 shadow-sm shadow-black/20 transition ${
+            dark
+              ? "border-white/10 bg-[#111827]/90"
+              : "border-black/10 bg-white"
+          }`}
         >
-          <span className="flex items-center gap-3 text-sm font-medium text-white min-w-0">
-            <span className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl bg-green-500/10 text-green-300">
+          <span className={`flex items-center gap-3 text-sm font-medium ${dark ? "text-white" : "text-black"} min-w-0`}>
+            <span className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl bg-[#FFCC00]/15 text-[#FFCC00]">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -161,7 +167,7 @@ export default function FilterTabs({
             </span>
             <div className="text-left min-w-0">
               <p className="text-xs uppercase tracking-[0.24em] text-gray-400">Chain selector</p>
-              <p className="text-sm font-semibold text-white truncate">{displayLabel}</p>
+              <p className={`text-sm font-semibold truncate ${dark ? "text-white" : "text-black"}`}>{displayLabel}</p>
             </div>
           </span>
           <svg
@@ -171,7 +177,7 @@ export default function FilterTabs({
             strokeWidth="1.8"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className={`h-5 w-5 text-green-300 transition ${isOpen ? "rotate-180" : "rotate-0"}`}
+            className={`h-5 w-5 text-[#FFCC00] transition ${isOpen ? "rotate-180" : "rotate-0"}`}
           >
             <path d="M6 9l6 6 6-6" />
           </svg>
@@ -180,7 +186,11 @@ export default function FilterTabs({
         <button
           type="button"
           onClick={() => setIsOpen((open) => !open)}
-          className="inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:bg-white/10"
+          className={`inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full border transition ${
+            dark
+              ? "border-white/10 bg-white/5 text-white hover:bg-white/10"
+              : "border-black/10 bg-black/5 text-black hover:bg-black/10"
+          }`}
           aria-label="Open filters"
         >
           <svg
@@ -202,7 +212,11 @@ export default function FilterTabs({
       {isOpen && (
         <div
           ref={panelRef}
-          className="absolute left-0 top-full z-20 mt-4 w-full rounded-[32px] border border-white/10 bg-[#08101f]/95 p-4 shadow-2xl shadow-black/40 backdrop-blur-xl sm:w-[32rem]"
+            className={`absolute left-0 top-full z-20 mt-4 w-full rounded-[32px] border p-4 shadow-2xl shadow-black/40 backdrop-blur-xl sm:w-[32rem] ${
+              dark
+                ? "border-white/10 bg-[#08101f]/95"
+                : "border-black/10 bg-white/95"
+            }`}
         >
           <div className="flex flex-col gap-4">
             <div className="rounded-3xl border border-white/10 bg-white/5 px-4 py-3">
@@ -215,18 +229,24 @@ export default function FilterTabs({
                 value={searchTerm}
                 onChange={(event) => setSearchTerm(event.target.value)}
                 placeholder="Search chains"
-                className="w-full bg-transparent text-sm text-white outline-none placeholder:text-gray-500"
+                className={`w-full bg-transparent text-sm outline-none placeholder:text-gray-500 ${
+                  dark ? "text-white" : "text-black"
+                }`}
               />
             </div>
 
-            <div className="flex items-center justify-between gap-4 rounded-3xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-gray-300">
-              <p className="font-medium text-white">Filter options</p>
+            <div className={`flex items-center justify-between gap-4 rounded-3xl border px-4 py-3 text-sm ${
+              dark ? "border-white/10 bg-white/5 text-gray-300" : "border-black/10 bg-black/5 text-gray-700"
+            }`}>
+              <p className={`font-medium ${dark ? "text-white" : "text-black"}`}>Filter options</p>
               <p className="text-xs text-gray-400">
                 {hasAllSelected ? "Showing all chains" : `${selectedChains.length} selected`}
               </p>
             </div>
 
-            <div className="max-h-[320px] overflow-y-auto rounded-3xl border border-white/10 bg-white/5 p-3">
+            <div className={`max-h-[320px] overflow-y-auto rounded-3xl border p-3 ${
+              dark ? "border-white/10 bg-white/5" : "border-black/10 bg-black/5"
+            }`}>
               <div className="grid gap-2">
                 {filteredChains.map((chain) => {
                   const checked = hasAllSelected
@@ -240,12 +260,14 @@ export default function FilterTabs({
                       onClick={() => toggleChain(chain)}
                       className={`flex w-full items-center justify-between rounded-2xl px-4 py-3 text-left text-sm transition ${
                         checked
-                          ? "bg-green-500/10 text-white"
-                          : "bg-transparent text-gray-200 hover:bg-white/10"
+                          ? "bg-[#FFCC00]/10 text-white"
+                          : dark
+                          ? "bg-transparent text-gray-200 hover:bg-white/10"
+                          : "bg-transparent text-black/80 hover:bg-black/10"
                       }`}
                     >
                       <span>{chain}</span>
-                      <span className={`inline-flex h-5 w-5 items-center justify-center rounded-full border ${checked ? "border-green-400 bg-green-400/15" : "border-white/10"}`}>
+                      <span className={`inline-flex h-5 w-5 items-center justify-center rounded-full border ${checked ? "border-[#FFCC00] bg-[#FFCC00]/15" : dark ? "border-white/10" : "border-black/10"}`}>
                         {checked ? (
                           <svg
                             viewBox="0 0 24 24"
@@ -254,7 +276,7 @@ export default function FilterTabs({
                             strokeWidth="3"
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            className="h-3 w-3 text-green-400"
+                            className="h-3 w-3 text-[#FFCC00]"
                           >
                             <path d="M5 13l4 4L19 7" />
                           </svg>
@@ -273,14 +295,18 @@ export default function FilterTabs({
                   setSelectedChains(["All Chains"]);
                   setSearchTerm("");
                 }}
-                className="rounded-3xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white transition hover:bg-white/10"
-              >
+                className={`rounded-3xl border px-4 py-3 text-sm transition ${
+                  dark
+                    ? "border-white/10 bg-white/5 text-white hover:bg-white/10"
+                    : "border-black/10 bg-black/5 text-black hover:bg-black/10"
+                }`}>
+
                 Reset
               </button>
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
-                className="rounded-3xl bg-green-500 px-4 py-3 text-sm font-semibold text-black transition hover:bg-green-400"
+                className="rounded-3xl bg-[#FFCC00] px-4 py-3 text-sm font-semibold text-black transition hover:bg-[#E6B800]"
               >
                 Apply filters
               </button>

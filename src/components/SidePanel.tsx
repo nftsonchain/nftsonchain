@@ -60,60 +60,62 @@ function Section({ title, children, active, toggle, dark }: SectionProps) {
 
 /* ================= SOCIAL ICONS ================= */
 
-const iconClass =
-  "w-6 h-6 cursor-pointer transition hover:scale-110 hover:drop-shadow-[0_0_6px_#FFCC00]";
+const iconClass = "w-6 h-6 cursor-pointer transition hover:scale-110";
 
 function XIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={iconClass}>
-      <path d="M18.244 2H21l-6.52 7.47L22 22h-6.8l-5.3-6.9L3.7 22H1l7-8.03L2 2h6.9l4.8 6.2L18.244 2Zm-2.4 18h1.7L7.2 4H5.4l10.444 16Z" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`${iconClass} text-[#1DA1F2]`}>
+      <path d="M5 5l14 14" />
+      <path d="M19 5L5 19" />
     </svg>
   );
 }
 
 function DiscordIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={iconClass}>
-      <path d="M20 4.5A17 17 0 0 0 16.5 3l-.3.6a15 15 0 0 1 3 1.2A15 15 0 0 0 12 3a15 15 0 0 0-7.2 1.8A15 15 0 0 1 7.8 3.6L7.5 3A17 17 0 0 0 4 4.5C2.2 7.2 1.7 10 2 12.8c2 1.5 4 2.4 6 3l.8-1.2a12 12 0 0 1-2.5-1.2l.5-.4c2.8 1.3 5.8 1.3 8.6 0l.5.4a12 12 0 0 1-2.5 1.2l.8 1.2c2-.6 4-1.5 6-3 .3-2.8-.2-5.6-2-8.3ZM9 13c-.8 0-1.5-.8-1.5-1.8S8.2 9.4 9 9.4s1.5.8 1.5 1.8S9.8 13 9 13Zm6 0c-.8 0-1.5-.8-1.5-1.8S14.2 9.4 15 9.4s1.5.8 1.5 1.8S15.8 13 15 13Z" />
+    <svg viewBox="0 0 24 24" fill="currentColor" className={`${iconClass} text-[#5865F2]`}>
+      <path d="M7.5 7c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3zm13 0c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3zm-8.5 8c-.75.75-1.9 1.5-3.5 1.5-1.6 0-2.75-.75-3.5-1.5A9.96 9.96 0 0 1 2 7.5C2 4.47 4.47 2 7.5 2h9c3.03 0 5.5 2.47 5.5 5.5 0 2.75-1.85 5.06-4.5 5.72-.7.2-1.4.3-2.2.3-1.5 0-2.5-.4-3-1.1z" />
     </svg>
   );
 }
 
 function TelegramIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={iconClass}>
-      <path d="M21.5 3.5 2.9 10.6c-1.3.5-1.3 1.3-.2 1.6l4.7 1.5 11-7c.5-.3.9-.1.5.2l-8.9 8.1-.3 4.8c.5 0 .7-.2 1-.5l2.4-2.3 4.7 3.5c.9.5 1.6.2 1.8-.9l3.2-15c.3-1.2-.5-1.7-1.3-1.2Z" />
+    <svg viewBox="0 0 24 24" fill="currentColor" className={`${iconClass} text-[#26A5E4]`}>
+      <path d="M22 3.5 2 10.3c-1.2.4-1.2 1.1-.2 1.5l4.6 1.5 11.1-6.9c.5-.3.9-.1.5.2l-8.7 7.9-.3 4.7c.5 0 .7-.2 1-.5l2.4-2.2 4.7 3.4c.9.5 1.6.2 1.8-.9l3.2-14.9c.3-1.1-.5-1.6-1.3-1.1Z" />
     </svg>
   );
 }
 
 function YouTubeIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={iconClass}>
-      <path d="M23 7.5s-.2-1.7-.9-2.4c-.9-.9-1.9-.9-2.4-1C16.3 4 12 4 12 4s-4.3 0-7.7.1c-.5.1-1.5.1-2.4 1C1.2 5.8 1 7.5 1 7.5S.8 9.4.8 11.3v1.4c0 1.9.2 3.8.2 3.8s.2 1.7.9 2.4c.9.9 2.1.9 2.6 1C6.7 20 12 20 12 20s4.3 0 7.7-.1c.5-.1 1.5-.1 2.4-1 .7-.7.9-2.4.9-2.4s.2-1.9.2-3.8v-1.4c0-1.9-.2-3.8-.2-3.8ZM10 14.7V9.3l5 2.7-5 2.7Z" />
+    <svg viewBox="0 0 24 24" className={`${iconClass} text-[#FF0000]`}>
+      <rect x="2" y="5" width="20" height="14" rx="5" fill="currentColor" />
+      <polygon points="10,8 16,12 10,16" fill="#fff" />
     </svg>
   );
 }
 
 function TikTokIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={iconClass}>
-      <path d="M16 3c.5 2.5 2 4 4.5 4v3.5c-1.8 0-3.5-.6-4.5-1.7v7.7c0 3.5-2.7 6.5-6.5 6.5S3 20 3 16.5 5.7 10 9.5 10c.5 0 1 .1 1.5.2v3.8c-.5-.2-1-.3-1.5-.3-1.7 0-3 1.4-3 3.3s1.3 3.3 3 3.3 3-1.5 3-3.5V3h4Z" />
+    <svg viewBox="0 0 24 24" className={`${iconClass} text-[#69C9D0]`}>
+      <path d="M17.5 3h-2c-1.1 0-2 .9-2 2v7.5c0 1.7 1.4 3.1 3.1 3.1 1.5 0 2.8-1.1 3-2.6v-2.4h-1.8v2.3c-.1.4-.5.7-.9.7-.6 0-1.1-.5-1.1-1.1V6.4h3.8V3Z" fill="currentColor" />
+      <path d="M7 14.5c0 2.7 2.3 4.8 5 4.8s5-2.1 5-4.8V3h-2v10.5c0 1.5-1.2 2.7-2.7 2.7s-2.8-1.2-2.8-2.7V8H7v6.5Z" fill="#010101" />
     </svg>
   );
 }
 
 function InstagramIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={iconClass}>
-      <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 6a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z" />
+    <svg viewBox="0 0 24 24" className={`${iconClass} text-[#E1306C]`}>
+      <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z" fill="currentColor" />
     </svg>
   );
 }
 
 function FacebookIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={iconClass}>
+    <svg viewBox="0 0 24 24" fill="currentColor" className={`${iconClass} text-[#1877F2]`}>
       <path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8v-3h2.5V9.5c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.7-1.6 1.4V12H17l-.4 3h-2.5v7A10 10 0 0 0 22 12Z" />
     </svg>
   );
