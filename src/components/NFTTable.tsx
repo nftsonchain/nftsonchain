@@ -1,21 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { allNFTs } from "@/data"; // ✅ FIXED IMPORT
+import { allNFTs } from "@/data";
+import type { NFT } from "@/data/types";
 import NFTModal from "./NFTModal";
-
-type NFT = {
-  id?: string;
-  name: string;
-  chain: string;
-  category: string;
-  supply: number;
-  description: string;
-  knownFor: string;
-  year: number;
-  twitter: string;
-  rarity?: string;
-};
 
 type Props = {
   selected: string;

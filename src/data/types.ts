@@ -1,4 +1,5 @@
 export type NFT = {
+  id?: string;
   name: string;
   chain: string;
   category: string;
@@ -7,5 +8,13 @@ export type NFT = {
   knownFor: string;
   year: number;
   twitter: string;
-  rarity: "Common" | "Rare" | "Epic" | "Legendary";
+  rarity:
+    | "common"
+    | "rare"
+    | "epic"
+    | "legendary"
+    | "Common"
+    | "Rare"
+    | "Epic"
+    | "Legendary";
 };

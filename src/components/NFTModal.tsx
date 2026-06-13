@@ -1,37 +1,27 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-
-type NFT = {
-  id: number;
-  name: string;
-  chain: string;
-  category: string;
-  supply: number;
-  description: string;
-  knownFor: string;
-  year: number;
-  twitter: string;
-  rarity: "Common" | "Rare" | "Legendary";
-};
+import type { NFT } from "@/data/types";
 
 type Props = {
   nft: NFT | null;
+  open: boolean;
   onClose: () => void;
+  dark: boolean;
 };
 
-function rarityStyle(rarity: string) {
-  switch (rarity) {
-    case "Legendary":
+function rarityStyle(rarity: NFT["rarity"]) {
+  switch (rarity.toLowerCase()) {
+    case "legendary":
       return "text-purple-300 bg-purple-500/10 border-purple-400/30";
-    case "Rare":
+    case "rare":
       return "text-blue-300 bg-blue-500/10 border-blue-400/30";
     default:
       return "text-green-300 bg-green-500/10 border-green-400/30";
   }
 }
 
-export default function NFTModal({ nft, onClose }: Props) {
+export default function NFTModal({ nft, onClose, dark }: Props) {
   const modalRef = useRef<HTMLDivElement>(null);
 
   // ESC CLOSE

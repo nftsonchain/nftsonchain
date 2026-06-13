@@ -1,5 +1,6 @@
 // src/data/index.ts
 
+import type { NFT } from "./types";
 import { ethereumNFTs } from "./ethereum";
 import { polygonNFTs } from "./polygon";
 import { arbitrumNFTs } from "./arbitrum";
@@ -62,4 +63,4 @@ export const allNFTs = [
   ...hederaNFTs,
   ...zilliqaNFTs,
   ...algorandNFTs,
-];
+] as NFT[];
