@@ -73,7 +73,7 @@ export default function NFTModal({ nft, onClose, dark }: Props) {
           {/* HEADER */}
           <div className="flex justify-between items-start mb-5">
             <div>
-              <h2 className="text-2xl font-bold text-[#00FF3B]">
+              <h2 className="text-2xl font-bold text-[#FFCC00]">
                 {nft.name}
               </h2>
               <p className="text-sm opacity-60">
@@ -129,7 +129,7 @@ export default function NFTModal({ nft, onClose, dark }: Props) {
           <a
             href={nft.twitter}
             target="_blank"
-            className="text-[#00FF3B] text-sm hover:underline"
+            className="text-[#FFCC00] text-sm hover:underline"
           >
             Visit X Profile →
           </a>

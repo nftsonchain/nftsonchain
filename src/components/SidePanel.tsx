@@ -39,7 +39,7 @@ function Section({ title, children, active, toggle, dark }: SectionProps) {
     >
       <button
         onClick={() => toggle(title)}
-        className="w-full flex items-center gap-2 py-3 font-semibold text-left text-[#00FF3B] hover:opacity-80 transition"
+        className="w-full flex items-center gap-2 py-3 font-semibold text-left text-[#FFCC00] hover:opacity-80 transition"
       >
         {title}
         <Chevron open={isOpen} />
@@ -61,7 +61,7 @@ function Section({ title, children, active, toggle, dark }: SectionProps) {
 /* ================= SOCIAL ICONS ================= */
 
 const iconClass =
-  "w-6 h-6 cursor-pointer transition hover:scale-110 hover:drop-shadow-[0_0_6px_#00FF3B]";
+  "w-6 h-6 cursor-pointer transition hover:scale-110 hover:drop-shadow-[0_0_6px_#FFCC00]";
 
 function XIcon() {
   return (
