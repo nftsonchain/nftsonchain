@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const titleIcon = new URL("./images/yhxyWdcf_400x400.jpg", import.meta.url);
+const titleIcon = new URL("../images/yhxyWdcf_400x400.jpg", import.meta.url);
 
 export const metadata: Metadata = {
   title: "NFTs OnChain",
