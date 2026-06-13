@@ -64,60 +64,78 @@ const iconClass = "w-6 h-6 cursor-pointer transition hover:scale-110";
 
 function XIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`${iconClass} text-[#1DA1F2]`}>
-      <path d="M5 5l14 14" />
-      <path d="M19 5L5 19" />
-    </svg>
+    <img
+      src="https://img.icons8.com/fluency/48/x.png"
+      alt="X"
+      className={iconClass}
+      loading="lazy"
+    />
   );
 }
 
 function DiscordIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={`${iconClass} text-[#5865F2]`}>
-      <path d="M7.5 7c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3zm13 0c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3zm-8.5 8c-.75.75-1.9 1.5-3.5 1.5-1.6 0-2.75-.75-3.5-1.5A9.96 9.96 0 0 1 2 7.5C2 4.47 4.47 2 7.5 2h9c3.03 0 5.5 2.47 5.5 5.5 0 2.75-1.85 5.06-4.5 5.72-.7.2-1.4.3-2.2.3-1.5 0-2.5-.4-3-1.1z" />
-    </svg>
+    <img
+      src="https://img.icons8.com/fluency/48/discord.png"
+      alt="Discord"
+      className={iconClass}
+      loading="lazy"
+    />
   );
 }
 
 function TelegramIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={`${iconClass} text-[#26A5E4]`}>
-      <path d="M22 3.5 2 10.3c-1.2.4-1.2 1.1-.2 1.5l4.6 1.5 11.1-6.9c.5-.3.9-.1.5.2l-8.7 7.9-.3 4.7c.5 0 .7-.2 1-.5l2.4-2.2 4.7 3.4c.9.5 1.6.2 1.8-.9l3.2-14.9c.3-1.1-.5-1.6-1.3-1.1Z" />
-    </svg>
+    <img
+      src="https://img.icons8.com/fluency/48/telegram-app.png"
+      alt="Telegram"
+      className={iconClass}
+      loading="lazy"
+    />
   );
 }
 
 function YouTubeIcon() {
   return (
-    <svg viewBox="0 0 24 24" className={`${iconClass} text-[#FF0000]`}>
-      <rect x="2" y="5" width="20" height="14" rx="5" fill="currentColor" />
-      <polygon points="10,8 16,12 10,16" fill="#fff" />
-    </svg>
+    <img
+      src="https://img.icons8.com/fluency/48/youtube-play.png"
+      alt="YouTube"
+      className={iconClass}
+      loading="lazy"
+    />
   );
 }
 
 function TikTokIcon() {
   return (
-    <svg viewBox="0 0 24 24" className={`${iconClass} text-[#69C9D0]`}>
-      <path d="M17.5 3h-2c-1.1 0-2 .9-2 2v7.5c0 1.7 1.4 3.1 3.1 3.1 1.5 0 2.8-1.1 3-2.6v-2.4h-1.8v2.3c-.1.4-.5.7-.9.7-.6 0-1.1-.5-1.1-1.1V6.4h3.8V3Z" fill="currentColor" />
-      <path d="M7 14.5c0 2.7 2.3 4.8 5 4.8s5-2.1 5-4.8V3h-2v10.5c0 1.5-1.2 2.7-2.7 2.7s-2.8-1.2-2.8-2.7V8H7v6.5Z" fill="#010101" />
-    </svg>
+    <img
+      src="https://img.icons8.com/fluency/48/tiktok.png"
+      alt="TikTok"
+      className={iconClass}
+      loading="lazy"
+    />
   );
 }
 
 function InstagramIcon() {
   return (
-    <svg viewBox="0 0 24 24" className={`${iconClass} text-[#E1306C]`}>
-      <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z" fill="currentColor" />
-    </svg>
+    <img
+      src="https://img.icons8.com/fluency/48/instagram-new.png"
+      alt="Instagram"
+      className={iconClass}
+      loading="lazy"
+    />
   );
 }
 
 function FacebookIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={`${iconClass} text-[#1877F2]`}>
-      <path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8v-3h2.5V9.5c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.7-1.6 1.4V12H17l-.4 3h-2.5v7A10 10 0 0 0 22 12Z" />
-    </svg>
+    <img
+      src="https://img.icons8.com/fluency/48/facebook-new.png"
+      alt="Facebook"
+      className={iconClass}
+      loading="lazy"
+    />
   );
 }
 
