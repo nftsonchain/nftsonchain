@@ -52,9 +52,15 @@ const chains = [
 export default function FilterTabs({
   selectedChains,
   setSelectedChains,
+  focusChain,
+  onFocusHandled,
+  autoCloseOnSelect = true,
 }: {
   selectedChains: string[];
   setSelectedChains: Dispatch<SetStateAction<string[]>>;
+  focusChain?: string | null;
+  onFocusHandled?: () => void;
+  autoCloseOnSelect?: boolean;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -80,6 +86,7 @@ export default function FilterTabs({
   const toggleChain = (chain: string) => {
     if (chain === "All Chains") {
       setSelectedChains(["All Chains"]);
+      setIsOpen(false);
       return;
     }
 
@@ -93,6 +100,8 @@ export default function FilterTabs({
 
       return [...normalized, chain];
     });
+    // close panel after a selection for quicker UX (configurable)
+    if (autoCloseOnSelect) setIsOpen(false);
   };
 
   useEffect(() => {
@@ -107,16 +116,34 @@ export default function FilterTabs({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    if (!focusChain) return;
+    // open panel and pre-fill search to focus the given chain
+    setSearchTerm(focusChain);
+    setIsOpen(true);
+    // let the panel render then try to scroll the target into view
+    setTimeout(() => {
+      try {
+        const selector = `button[data-chain="${focusChain}"]`;
+        const el = panelRef.current?.querySelector(selector) as HTMLElement | null;
+        el?.scrollIntoView({ behavior: "smooth", block: "center" });
+      } catch (e) {
+        // ignore
+      }
+    }, 80);
+    onFocusHandled?.();
+  }, [focusChain, onFocusHandled]);
+
   return (
     <div className="relative mt-6">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex items-center gap-3 flex-nowrap">
         <button
           type="button"
           onClick={() => setIsOpen((open) => !open)}
-          className="flex w-full items-center justify-between gap-3 rounded-[32px] border border-white/10 bg-[#111827]/90 px-4 py-4 shadow-sm shadow-black/20 transition hover:border-green-400/40 sm:max-w-2xl"
+          className="flex flex-1 min-w-0 items-center justify-between gap-3 rounded-[32px] border border-white/10 bg-[#111827]/90 px-4 py-3 shadow-sm shadow-black/20 transition hover:border-green-400/40"
         >
-          <span className="flex items-center gap-3 text-sm font-medium text-white">
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-green-500/10 text-green-300">
+          <span className="flex items-center gap-3 text-sm font-medium text-white min-w-0">
+            <span className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl bg-green-500/10 text-green-300">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -132,9 +159,9 @@ export default function FilterTabs({
                 <path d="M14 6l6 6-6 6" />
               </svg>
             </span>
-            <div className="text-left">
+            <div className="text-left min-w-0">
               <p className="text-xs uppercase tracking-[0.24em] text-gray-400">Chain selector</p>
-              <p className="text-sm font-semibold text-white">{displayLabel}</p>
+              <p className="text-sm font-semibold text-white truncate">{displayLabel}</p>
             </div>
           </span>
           <svg
@@ -153,7 +180,7 @@ export default function FilterTabs({
         <button
           type="button"
           onClick={() => setIsOpen((open) => !open)}
-          className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:bg-white/10"
+          className="inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:bg-white/10"
           aria-label="Open filters"
         >
           <svg
@@ -209,6 +236,7 @@ export default function FilterTabs({
                     <button
                       key={chain}
                       type="button"
+                      data-chain={chain}
                       onClick={() => toggleChain(chain)}
                       className={`flex w-full items-center justify-between rounded-2xl px-4 py-3 text-left text-sm transition ${
                         checked

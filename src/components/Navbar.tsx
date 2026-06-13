@@ -34,12 +34,13 @@ export default function Navbar({
           {/* TOGGLE SWITCH */}
           <button
             onClick={() => setDark((prev) => !prev)}
-            className={`w-14 h-7 flex items-center rounded-full p-1 transition
+            className={`w-14 h-7 flex items-center rounded-full p-1 overflow-hidden transition
               ${dark ? "bg-[#00F20A]" : "bg-gray-400"}`}
           >
             <div
-              className={`w-5 h-5 bg-white rounded-full shadow-md transform transition flex items-center justify-center
-                ${dark ? "translate-x-7" : "translate-x-0"}`}
+              className={`w-5 h-5 bg-white rounded-full shadow-md transition-all flex items-center justify-center ${
+                dark ? "ml-auto" : "ml-0"
+              }`}
             >
               {dark ? (
                 <Sun className="w-3 h-3 text-black" />
