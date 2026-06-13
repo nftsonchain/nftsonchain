@@ -1,6 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { Search, MoreVertical, Sun, Moon } from "lucide-react";
+import logoImage from "@/images/yhxyWdcf_400x400.jpg";
 
 type Props = {
   onMenuClick: () => void;
@@ -49,6 +51,17 @@ export default function Navbar({
               )}
             </div>
           </button>
+
+          {/* SITE ICON */}
+          <div className="w-9 h-9 rounded-full overflow-hidden border border-black/10 bg-white shadow-sm">
+            <Image
+              src={logoImage}
+              alt="NFTs OnChain logo"
+              width={36}
+              height={36}
+              className="object-cover"
+            />
+          </div>
 
           {/* LOGO */}
           <h1 className="font-bold text-lg text-[#FFCC00]">
