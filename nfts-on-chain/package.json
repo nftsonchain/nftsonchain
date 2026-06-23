@@ -1,5 +1,5 @@
 {
-  "name": "nfts-onchain",
+  "name": "nfts-on-chain",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,13 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^6.39.5",
-    "axios": "^1.7.0",
-    "lucide-react": "^1.14.0",
-    "mongodb": "^6.9.0",
-    "mongoose": "^8.24.1",
-    "next": "16.2.4",
-    "openai": "^4.104.0",
+    "next": "16.2.9",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
@@ -25,7 +19,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.2.4",
+    "eslint-config-next": "16.2.9",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

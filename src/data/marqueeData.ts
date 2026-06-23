@@ -1,0 +1,31 @@
+export const TOP_NFT_COLLECTIONS = [
+  { name: "Bored Ape Yacht Club", shortName: "BAYC" },
+  { name: "CryptoPunks", shortName: "CP" },
+  { name: "Azuki", shortName: "AZKI" },
+  { name: "Pudgy Penguins", shortName: "PP" },
+  { name: "Mad Lads", shortName: "ML" },
+  { name: "DeGods", shortName: "DG" },
+  { name: "Bitcoin Puppets", shortName: "BP" },
+  { name: "NodeMonkes", shortName: "NM" },
+  { name: "Bad Kids", shortName: "BK" },
+  { name: "Celestians", shortName: "CEL" },
+  { name: "Milady", shortName: "MIL" },
+  { name: "Doodles", shortName: "DOODLE" },
+  { name: "Moonbirds", shortName: "MB" },
+  { name: "CloneX", shortName: "CX" },
+  { name: "Lords", shortName: "LORDS" },
+];
+
+export const NFT_MARKETPLACES = [
+  { name: "OpenSea", icon: "🌊" },
+  { name: "Blur", icon: "✨" },
+  { name: "Magic Eden", icon: "✧" },
+  { name: "Tensor", icon: "⚡" },
+  { name: "Gamma", icon: "🎯" },
+  { name: "Unisat", icon: "⛓️" },
+  { name: "Stargaze", icon: "🌟" },
+  { name: "Getgems", icon: "💎" },
+  { name: "XRP Cafe", icon: "☕" },
+  { name: "Rarible", icon: "🎨" },
+  { name: "SuperRare", icon: "🏆" },
+];

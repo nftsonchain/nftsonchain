@@ -9,6 +9,7 @@ import FilterTabs from "@/components/FilterTabs";
 import NFTTable from "@/components/NFTTable";
 import SidePanel from "@/components/SidePanel";
 import BackToTop from "@/components/BackToTop";
+import BottomNav from "@/components/BottomNav";
 
 export default function Home() {
   const [selectedChains, setSelectedChains] = useState<string[]>(["All Chains"]);
@@ -34,13 +35,13 @@ export default function Home() {
         setDark={setDark}
       />
 
-      {/* 🔁 MARQUEE (FIXED) */}
+      {/* 🔁 MARQUEE (NFT COLLECTIONS) */}
       <Marquee dark={dark} />
 
       {/* 📦 MAIN CONTENT */}
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4 pb-24">
 
-        {/* 🏪 MARKETPLACES */}
+        {/* 🏪 MARKETPLACES MARQUEE */}
         <Marketplaces dark={dark} />
 
         {/* 🧩 NFTs TITLE */}
@@ -113,6 +114,9 @@ export default function Home() {
 
       {/* 🔝 BACK TO TOP */}
       <BackToTop />
+
+      {/* 📱 BOTTOM NAVIGATION */}
+      <BottomNav dark={dark} />
     </main>
   );
 }
