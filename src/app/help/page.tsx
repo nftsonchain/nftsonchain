@@ -68,8 +68,8 @@ export default function HelpPage() {
     <main
       className={
         dark
-          ? "bg-[#0B0F1A] text-white min-h-screen"
-          : "bg-white text-black min-h-screen"
+          ? "bg-[#0B0F1A] text-white h-screen overflow-y-scroll"
+          : "bg-white text-black h-screen overflow-y-scroll"
       }
     >
       <Navbar
@@ -80,96 +80,128 @@ export default function HelpPage() {
         setDark={setDark}
       />
 
-      <div className="max-w-3xl mx-auto px-4 py-8 pb-32">
-        <h1 className="text-3xl font-bold mb-2 text-[#FFCC00]">Help Center</h1>
-        <p className={`mb-8 ${dark ? "text-white/60" : "text-black/60"}`}>
-          Find answers to common questions about NFTs OnChain
-        </p>
+      {/* CENTERED MAIN CONTAINER */}
+      <div className="w-full flex justify-center px-6 md:px-10 py-14 min-h-full">
+        <div className="w-full max-w-5xl pb-56">
 
-        {/* FAQ Section */}
-        <div className="space-y-3 mb-12">
-          {FAQS.map((item, index) => (
-            <div
-              key={index}
-              className={`rounded-lg border transition ${
-                dark
-                  ? "border-white/10 hover:border-white/20"
-                  : "border-black/10 hover:border-black/20"
+          {/* HEADER */}
+          <div className="mb-14 text-center max-w-4xl mx-auto">
+            <h1 className="text-5xl font-bold mb-4 text-[#FFCC00] tracking-tight">
+              Help Center
+            </h1>
+
+            <p
+              className={`text-xl leading-relaxed ${
+                dark ? "text-white/65" : "text-black/65"
               }`}
             >
-              <button
-                onClick={() => toggleFAQ(index)}
-                className={`w-full p-4 flex items-center justify-between font-semibold transition ${
-                  activeIndex === index
-                    ? dark
-                      ? "bg-white/5"
-                      : "bg-black/5"
-                    : ""
+              Find answers to common questions about NFTs OnChain, platform
+              usage, supported chains, submissions, AI assistant, and more.
+            </p>
+          </div>
+
+          {/* FAQ SECTION */}
+          <div className="space-y-6 mb-20">
+            {FAQS.map((item, index) => (
+              <div
+                key={index}
+                className={`rounded-2xl border backdrop-blur-xl transition-all duration-300 ${
+                  dark
+                    ? "border-white/10 bg-white/[0.03] hover:border-white/20"
+                    : "border-black/10 bg-black/[0.03] hover:border-black/20"
                 }`}
               >
-                <span className="text-left text-[#FFCC00]">{item.question}</span>
-                <ChevronDown
-                  className={`w-5 h-5 transition-transform ${
-                    activeIndex === index ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
-
-              {activeIndex === index && (
-                <div
-                  className={`p-4 border-t ${
-                    dark
-                      ? "border-white/10 bg-white/5 text-white/80"
-                      : "border-black/10 bg-black/5 text-black/80"
+                <button
+                  onClick={() => toggleFAQ(index)}
+                  className={`w-full px-8 py-7 flex items-center justify-between transition ${
+                    activeIndex === index
+                      ? dark
+                        ? "bg-white/5"
+                        : "bg-black/5"
+                      : ""
                   }`}
                 >
-                  {item.answer}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
+                  <span className="text-left text-[#FFCC00] text-2xl font-semibold leading-relaxed">
+                    {item.question}
+                  </span>
 
-        {/* Support Section */}
-        <div
-          className={`rounded-lg p-6 ${dark ? "bg-white/5" : "bg-black/5"}`}
-        >
-          <h2 className="text-xl font-bold mb-4 text-[#FFCC00]">
-            Still Need Help?
-          </h2>
-          <p className={`mb-4 ${dark ? "text-white/80" : "text-black/80"}`}>
-            Join our community to get help from the team and other NFT enthusiasts.
-          </p>
-          <div className="flex gap-4 flex-wrap">
-            <a
-              href="https://discord.gg/WvtMNVQjcw"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`px-4 py-2 rounded-lg font-semibold transition ${
-                dark
-                  ? "bg-[#FFCC00] text-black hover:bg-[#FFEE00]"
-                  : "bg-[#FFCC00] text-black hover:bg-[#FFEE00]"
-              }`}
-            >
-              Join Discord
-            </a>
-            <a
-              href="https://x.com/nfts_onchain"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`px-4 py-2 rounded-lg font-semibold transition border ${
-                dark
-                  ? "border-white/20 text-white hover:bg-white/10"
-                  : "border-black/20 text-black hover:bg-black/10"
-              }`}
-            >
-              Follow on X
-            </a>
+                  <ChevronDown
+                    className={`w-7 h-7 transition-transform duration-300 ${
+                      activeIndex === index ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {activeIndex === index && (
+                  <div
+                    className={`px-8 py-7 border-t text-lg leading-relaxed ${
+                      dark
+                        ? "border-white/10 bg-white/5 text-white/80"
+                        : "border-black/10 bg-black/5 text-black/80"
+                    }`}
+                  >
+                    {item.answer}
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
+
+          {/* SUPPORT SECTION */}
+          <div
+            className={`rounded-2xl p-10 backdrop-blur-xl border mb-20 ${
+              dark
+                ? "bg-white/5 border-white/10"
+                : "bg-black/5 border-black/10"
+            }`}
+          >
+            <h2 className="text-3xl font-bold mb-5 text-[#FFCC00]">
+              Still Need Help?
+            </h2>
+
+            <p
+              className={`text-lg mb-8 max-w-3xl leading-relaxed ${
+                dark ? "text-white/80" : "text-black/80"
+              }`}
+            >
+              Join our community to get support from the team and connect with
+              other NFT collectors, creators, and Web3 builders.
+            </p>
+
+            <div className="flex gap-5 flex-wrap">
+              <a
+                href="https://discord.gg/WvtMNVQjcw"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-7 py-4 rounded-xl font-semibold text-lg bg-[#FFCC00] text-black hover:bg-[#FFEE00] transition"
+              >
+                Join Discord
+              </a>
+
+              <a
+                href="https://x.com/nfts_onchain"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`px-7 py-4 rounded-xl font-semibold text-lg border transition ${
+                  dark
+                    ? "border-white/20 text-white hover:bg-white/10"
+                    : "border-black/20 text-black hover:bg-black/10"
+                }`}
+              >
+                Follow on X
+              </a>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <SidePanel open={menuOpen} onClose={() => setMenuOpen(false)} dark={dark} />
+      <SidePanel
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        dark={dark}
+      />
+
       <BottomNav dark={dark} />
     </main>
   );

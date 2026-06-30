@@ -2,6 +2,17 @@
 
 import { useEffect, useRef } from "react";
 import type { NFT } from "@/data/types";
+import {
+  FileText,
+  Sparkles,
+  Store,
+  ExternalLink,
+  Calendar,
+  Box,
+  X,
+  ThumbsUp,
+  Heart,
+} from "lucide-react";
 
 type Props = {
   nft: NFT | null;
@@ -10,131 +21,263 @@ type Props = {
   dark: boolean;
 };
 
-function rarityStyle(rarity: NFT["rarity"]) {
-  switch (rarity.toLowerCase()) {
-    case "legendary":
-      return "text-purple-300 bg-purple-500/10 border-purple-400/30";
-    case "rare":
-      return "text-blue-300 bg-blue-500/10 border-blue-400/30";
-    default:
-      return "text-green-300 bg-green-500/10 border-green-400/30";
-  }
+function getMarketplaces(chain: string) {
+  const maps: Record<string, string[]> = {
+    Ethereum: ["OpenSea", "Rarible", "LooksRare", "Blur", "Foundation"],
+    Solana: ["Magic Eden", "Tensor", "LaunchMyNFT"],
+    Bitcoin: ["Magic Eden", "UniSat", "Gamma"],
+    Polygon: ["OpenSea", "Rarible"],
+    Base: ["OpenSea", "Zora"],
+    Arbitrum: ["Treasure", "OpenSea"],
+    Optimism: ["Quix", "OpenSea"],
+    Avalanche: ["Joepegs"],
+    Cosmos: ["Stargaze"],
+    Gram: ["Getgems"],
+    BNB: ["Binance NFT", "PancakeSwap NFT"],
+    Tezos: ["Objkt"],
+    Cardano: ["JPG Store"],
+    Immutable: ["Immutable Market"],
+  };
+
+  return maps[chain] || ["Marketplace not available"];
 }
 
-export default function NFTModal({ nft, onClose, dark }: Props) {
+function getMarketColor(name: string) {
+  const colors: Record<string, string> = {
+    OpenSea: "bg-blue-400/10 text-blue-100 border-blue-400/20",
+    Rarible: "bg-pink-400/10 text-pink-100 border-pink-400/20",
+    LooksRare: "bg-emerald-400/10 text-emerald-100 border-emerald-400/20",
+    Blur: "bg-orange-400/10 text-orange-100 border-orange-400/20",
+    Foundation: "bg-purple-400/10 text-purple-100 border-purple-400/20",
+  };
+
+  return colors[name] || "bg-white/5 text-white/70 border-white/10";
+}
+
+export default function NFTModal({
+  nft,
+  open,
+  onClose,
+}: Props) {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // ESC CLOSE
+  const isSignedIn = false;
+
   useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
+    if (!open) return;
+
+    const esc = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
 
-    window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
-  }, [onClose]);
+    window.addEventListener("keydown", esc);
+    return () => window.removeEventListener("keydown", esc);
+  }, [open, onClose]);
 
-  // CLICK OUTSIDE CLOSE (ROBUST FIX)
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (!modalRef.current) return;
-      if (!modalRef.current.contains(e.target as Node)) {
+    if (!open) return;
+
+    const outside = (e: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
         onClose();
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [onClose]);
+    document.addEventListener("mousedown", outside);
+    return () => document.removeEventListener("mousedown", outside);
+  }, [open, onClose]);
 
-  if (!nft) return null;
+  if (!open || !nft) return null;
+
+  const marketplaces = getMarketplaces(nft.chain);
+
+  const handleLike = () => {
+    if (!isSignedIn) {
+      alert("To like an NFT, you must sign in first.");
+      return;
+    }
+  };
+
+  const handleFavorite = () => {
+    if (!isSignedIn) {
+      alert("To favorite an NFT, you must sign in first.");
+      return;
+    }
+  };
 
   return (
-    <>
+    <div className="fixed inset-0 z-[999999] flex items-center justify-center px-6 py-12">
       {/* BACKDROP */}
-      <div className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm" />
+      <div
+        className="absolute inset-0 bg-black/40 backdrop-blur-3xl"
+        onClick={onClose}
+      />
 
       {/* MODAL */}
-      <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
-        <div
-          ref={modalRef}
-          className="
-            w-full max-w-2xl
-            rounded-2xl
-            p-6
-            relative
-            shadow-2xl
-            border
-            bg-white/10 backdrop-blur-2xl
-            border-white/10
-            text-white
-          "
+      <div
+        ref={modalRef}
+        className="
+          relative z-10
+          w-full max-w-[820px]
+          max-h-[90vh]
+          overflow-hidden
+          rounded-[34px]
+          border border-white/10
+          shadow-[0_45px_140px_rgba(0,0,0,0.55)]
+          backdrop-blur-[28px]
+          bg-white/5
+        "
+      >
+        {/* GLOW */}
+        <div className="absolute -top-28 -left-28 w-96 h-96 bg-yellow-400/5 blur-[160px]" />
+        <div className="absolute -bottom-28 -right-28 w-96 h-96 bg-blue-500/5 blur-[160px]" />
+
+        {/* CLOSE */}
+        <button
+          onClick={onClose}
+          className="absolute top-5 right-5 w-11 h-11 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white/60 hover:text-white transition"
         >
+          <X size={20} />
+        </button>
+
+        <div className="relative p-12 space-y-12">
           {/* HEADER */}
-          <div className="flex justify-between items-start mb-5">
-            <div>
-              <h2 className="text-2xl font-bold text-[#FFCC00]">
-                {nft.name}
-              </h2>
-              <p className="text-sm opacity-60">
-                {nft.chain} • {nft.category}
-              </p>
+          <div className="space-y-6">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-yellow-400/90 to-amber-500/90 flex items-center justify-center shadow-lg">
+              <span className="text-xl font-black text-black">
+                {nft.id ?? "NFT"}
+              </span>
             </div>
 
-            <button
-              onClick={onClose}
-              className="opacity-60 hover:opacity-100"
-            >
-              ✕
-            </button>
+            <h1 className="text-[#FFCC00] text-4xl font-semibold">
+              {nft.name}
+            </h1>
+
+            <p className="text-white/50 text-base">
+              {nft.chain} • {nft.category || "NFT Collection"}
+            </p>
+
+            {/* LIKE + FAVORITE */}
+            <div className="flex items-center gap-5 pt-2">
+              <button
+                onClick={handleLike}
+                className="flex items-center gap-2 text-white/70 hover:text-[#FFCC00] transition"
+              >
+                <ThumbsUp size={18} />
+                <span>Like</span>
+              </button>
+
+              <button
+                onClick={handleFavorite}
+                className="flex items-center gap-2 text-white/70 hover:text-red-400 transition"
+              >
+                <Heart size={18} />
+                <span>Favorite</span>
+              </button>
+            </div>
           </div>
 
-          {/* RARITY */}
-          <div className="mb-5">
-            <span
-              className={`px-3 py-1 text-xs rounded-full border ${rarityStyle(
-                nft.rarity
-              )}`}
-            >
-              {nft.rarity}
-            </span>
-          </div>
-
-          {/* GRID */}
-          <div className="grid grid-cols-2 gap-3 mb-5">
-            <div className="p-3 rounded-xl bg-white/5 border border-white/10">
-              <p className="text-xs opacity-60">Supply</p>
-              <p className="font-semibold">{nft.supply.toLocaleString()}</p>
+          {/* STATS */}
+          <div className="grid grid-cols-2 gap-10">
+            <div className="space-y-1">
+              <div className="text-white/40 text-sm flex items-center gap-2">
+                <Box size={14} />
+                TOTAL SUPPLY
+              </div>
+              <div className="text-2xl text-white">
+                {nft.supply?.toLocaleString() || "-"}
+              </div>
             </div>
 
-            <div className="p-3 rounded-xl bg-white/5 border border-white/10">
-              <p className="text-xs opacity-60">Year</p>
-              <p className="font-semibold">{nft.year}</p>
+            <div className="space-y-1">
+              <div className="text-white/40 text-sm flex items-center gap-2">
+                <Calendar size={14} />
+                LAUNCH YEAR
+              </div>
+              <div className="text-2xl text-white">
+                {nft.year || "-"}
+              </div>
             </div>
           </div>
 
           {/* DESCRIPTION */}
-          <div className="mb-4">
-            <p className="text-xs opacity-60 mb-1">Description</p>
-            <p className="text-sm opacity-80">{nft.description}</p>
+          <div className="space-y-3">
+            <div className="text-white/50 flex items-center gap-2">
+              <FileText size={16} />
+              DESCRIPTION
+            </div>
+
+            <p className="text-white/80 leading-8">
+              {nft.description || "No description available."}
+            </p>
           </div>
 
           {/* KNOWN FOR */}
-          <div className="mb-6">
-            <p className="text-xs opacity-60 mb-1">Known For</p>
-            <p className="text-sm opacity-80">{nft.knownFor}</p>
+          <div className="space-y-3">
+            <div className="text-white/50 flex items-center gap-2">
+              <Sparkles size={16} />
+              KNOWN FOR
+            </div>
+
+            <p className="text-white/80 leading-8">
+              {nft.knownFor || "No data available."}
+            </p>
           </div>
 
-          {/* LINK */}
-          <a
-            href={nft.twitter}
-            target="_blank"
-            className="text-[#FFCC00] text-sm hover:underline"
-          >
-            Visit X Profile →
-          </a>
+          {/* MARKETPLACES */}
+          <div className="space-y-3">
+            <div className="text-white/50 flex items-center gap-2">
+              <Store size={16} />
+              MARKETPLACES
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              {marketplaces.map((m, i) => (
+                <div
+                  key={i}
+                  className={`
+                    px-5 py-2.5
+                    rounded-full
+                    border
+                    text-sm
+                    font-medium
+                    backdrop-blur-xl
+                    transition
+                    hover:scale-105
+                    ${getMarketColor(m)}
+                  `}
+                >
+                  {m}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
+
+        {/* CTA */}
+        {nft.twitter && (
+          <div className="flex justify-center pb-12 pt-6">
+            <a
+              href={nft.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                flex items-center gap-3
+                px-10 py-4
+                rounded-full
+                bg-[#FFCC00]/90
+                text-black
+                font-semibold
+                shadow-lg shadow-yellow-500/20
+                hover:scale-105 transition
+              "
+            >
+              Visit X Profile
+              <ExternalLink size={18} />
+            </a>
+          </div>
+        )}
       </div>
-    </>
+    </div>
   );
 }

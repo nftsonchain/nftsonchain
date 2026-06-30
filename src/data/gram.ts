@@ -1,7 +1,7 @@
-export const tonNFTs = [
+export const gramNFTs = [
   {
     name: "Telegram Gifts NFT System",
-    chain: "TON",
+    chain: "Gram",
     category: "Utility",
     supply: 0,
     description: "NFT-based gifts integrated inside Telegram ecosystem",
@@ -12,7 +12,7 @@ export const tonNFTs = [
   },
   {
     name: "TON Diamonds Gifts",
-    chain: "TON",
+    chain: "Gram",
     category: "Collectible",
     supply: 0,
     description: "Premium Telegram gift NFTs used as digital collectibles",
@@ -23,7 +23,7 @@ export const tonNFTs = [
   },
   {
     name: "TON Diamonds Collection Ecosystem",
-    chain: "TON",
+    chain: "Gram",
     category: "Collectible",
     supply: 0,
     description: "Telegram-native collectible NFT system",
@@ -34,7 +34,7 @@ export const tonNFTs = [
   },
   {
     name: "TON Punks",
-    chain: "TON",
+    chain: "Gram",
     category: "PFP",
     supply: 10000,
     description: "Punk-style NFT collection on TON blockchain",
@@ -45,18 +45,18 @@ export const tonNFTs = [
   },
   {
     name: "TON Ape Club",
-    chain: "TON",
+    chain: "Gram",
     category: "PFP",
     supply: 10000,
-    description: "Ape-themed NFT collection on TON",
-    knownFor: "Community-driven TON identity NFTs",
+    description: "Ape-themed NFT collection on Gram",
+    knownFor: "Community-driven Gram identity NFTs",
     year: 2023,
     twitter: "https://x.com/ton_blockchain",
     rarity: "rare"
   },
   {
-    name: "TON DNS NFT Domains",
-    chain: "TON",
+    name: "Gram DNS NFT Domains",
+    chain: "Gram",
     category: "Identity",
     supply: 0,
     description: "NFT-based domain names on TON blockchain",
@@ -67,7 +67,7 @@ export const tonNFTs = [
   },
   {
     name: "Fragment Username NFTs",
-    chain: "TON",
+    chain: "Gram",
     category: "Identity",
     supply: 0,
     description: "Telegram username NFTs sold via Fragment",
@@ -78,7 +78,7 @@ export const tonNFTs = [
   },
   {
     name: "TON NFTs Marketplace Ecosystem",
-    chain: "TON",
+    chain: "Gram",
     category: "Marketplace",
     supply: 0,
     description: "Aggregated NFT trading ecosystem on TON",
@@ -89,7 +89,7 @@ export const tonNFTs = [
   },
   {
     name: "Getgems NFT Platform Assets",
-    chain: "TON",
+    chain: "Gram",
     category: "Marketplace",
     supply: 0,
     description: "Main NFT marketplace on TON blockchain",
@@ -100,7 +100,7 @@ export const tonNFTs = [
   },
   {
     name: "TON Mini App NFT Assets",
-    chain: "TON",
+    chain: "Gram",
     category: "GameFi",
     supply: 0,
     description: "NFTs used inside Telegram mini-app games",
@@ -111,7 +111,7 @@ export const tonNFTs = [
   },
   {
     name: "TON Space NFT Wallet Identity",
-    chain: "TON",
+    chain: "Gram",
     category: "Utility",
     supply: 0,
     description: "NFT-linked wallet identity system inside TON ecosystem",
@@ -122,7 +122,7 @@ export const tonNFTs = [
   },
   {
     name: "Tonkeeper NFT Integration Assets",
-    chain: "TON",
+    chain: "Gram",
     category: "Wallet Utility",
     supply: 0,
     description: "NFT display and management system inside Tonkeeper wallet",
@@ -133,7 +133,7 @@ export const tonNFTs = [
   },
   {
     name: "TON Collectibles (Telegram Stickers NFTs)",
-    chain: "TON",
+    chain: "Gram",
     category: "Collectible",
     supply: 0,
     description: "Sticker-based NFT collectibles inside Telegram ecosystem",
@@ -144,7 +144,7 @@ export const tonNFTs = [
   },
   {
     name: "Fragment NFT Auctions System",
-    chain: "TON",
+    chain: "Gram",
     category: "Marketplace",
     supply: 0,
     description: "Auction system for Telegram usernames and digital assets",
@@ -154,8 +154,8 @@ export const tonNFTs = [
     rarity: "legendary"
   },
   {
-    name: "TON Proxy NFT Access Keys",
-    chain: "TON",
+    name: "Gram Proxy NFT Access Keys",
+    chain: "Gram",
     category: "Utility",
     supply: 0,
     description: "NFT-based access keys for proxy and private services",
@@ -166,7 +166,7 @@ export const tonNFTs = [
   },
   {
     name: "TON DeFi NFT Rewards",
-    chain: "TON",
+    chain: "Gram",
     category: "DeFi",
     supply: 0,
     description: "NFT rewards issued for DeFi participation on TON",
@@ -177,7 +177,7 @@ export const tonNFTs = [
   },
   {
     name: "TON GameFi Mini App NFTs",
-    chain: "TON",
+    chain: "Gram",
     category: "GameFi",
     supply: 0,
     description: "NFT assets used inside Telegram-based mini games",
@@ -188,7 +188,7 @@ export const tonNFTs = [
   },
   {
     name: "TON Proof-of-Participation NFTs",
-    chain: "TON",
+    chain: "Gram",
     category: "Utility",
     supply: 0,
     description: "NFT badges for ecosystem participation and events",
@@ -199,7 +199,7 @@ export const tonNFTs = [
   },
   {
     name: "TON Community Badge NFTs",
-    chain: "TON",
+    chain: "Gram",
     category: "Community",
     supply: 0,
     description: "NFT badges for TON community contributors",
@@ -210,7 +210,7 @@ export const tonNFTs = [
   },
   {
     name: "TON Ecosystem Partner NFTs",
-    chain: "TON",
+    chain: "Gram",
     category: "Utility",
     supply: 0,
     description: "NFT credentials for ecosystem partners and builders",

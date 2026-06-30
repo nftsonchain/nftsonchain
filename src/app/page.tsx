@@ -5,118 +5,115 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Marquee from "@/components/Marquee";
 import Marketplaces from "@/components/Marketplaces";
+import MarketLaunch from "@/components/MarketLaunch";
 import FilterTabs from "@/components/FilterTabs";
 import NFTTable from "@/components/NFTTable";
+import NFTModal from "@/components/NFTModal";
 import SidePanel from "@/components/SidePanel";
 import BackToTop from "@/components/BackToTop";
 import BottomNav from "@/components/BottomNav";
 
+import type { NFT } from "@/data/types";
+
 export default function Home() {
-  const [selectedChains, setSelectedChains] = useState<string[]>(["All Chains"]);
+  const [selectedChains, setSelectedChains] = useState<string[]>([
+    "All Chains",
+  ]);
   const [focusChain, setFocusChain] = useState<string | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [search, setSearch] = useState("");
-  const [dark, setDark] = useState(true);
+  const [dark] = useState(true);
+
+  const [selectedNFT, setSelectedNFT] = useState<NFT | null>(null);
 
   return (
-    <main
-      className={
-        dark
-          ? "bg-[#0B0F1A] text-white min-h-screen"
-          : "bg-white text-black min-h-screen"
-      }
-    >
-      {/* 🔝 NAVBAR */}
-      <Navbar
-        onMenuClick={() => setMenuOpen(true)}
-        search={search}
-        setSearch={setSearch}
-        dark={dark}
-        setDark={setDark}
-      />
+    <>
+      <main
+        className={
+          dark
+            ? "min-h-screen bg-[#0B0F1A] text-white"
+            : "min-h-screen bg-white text-black"
+        }
+      >
+        <Navbar
+          onMenuClick={() => setMenuOpen(true)}
+          search={search}
+          setSearch={setSearch}
+          dark={dark}
+          setDark={() => {}}
+        />
 
-      {/* 🔁 MARQUEE (NFT COLLECTIONS) */}
-      <Marquee dark={dark} />
-
-      {/* 📦 MAIN CONTENT */}
-      <div className="max-w-7xl mx-auto px-4 pb-24">
-
-        {/* 🏪 MARKETPLACES MARQUEE */}
+        <Marquee dark={dark} />
         <Marketplaces dark={dark} />
 
-        {/* 🧩 NFTs TITLE */}
-        <h2 className="text-2xl font-semibold mt-10 mb-2">
-          NFTs
-        </h2>
+        <div className="mx-auto w-full max-w-7xl px-4 md:px-6 lg:px-8 py-8 space-y-10">
+          <section
+            className={`rounded-[32px] p-6 md:p-8 border ${
+              dark
+                ? "bg-white/[0.03] border-white/10"
+                : "bg-black/[0.03] border-black/10"
+            }`}
+          >
+            <MarketLaunch dark={dark} />
+          </section>
 
-        {/* 🔘 FILTER TABS */}
-        <FilterTabs
-          selectedChains={selectedChains}
-          setSelectedChains={setSelectedChains}
-          focusChain={focusChain}
-          onFocusHandled={() => setFocusChain(null)}
+          <section
+            className={`rounded-[32px] p-6 border ${
+              dark
+                ? "bg-white/[0.03] border-white/10"
+                : "bg-black/[0.03] border-black/10"
+            }`}
+          >
+            <div className="mb-6">
+              <h2 className="text-3xl font-bold">Explore NFTs</h2>
+            </div>
+
+            <FilterTabs
+              selectedChains={selectedChains}
+              setSelectedChains={setSelectedChains}
+              focusChain={focusChain}
+              onFocusHandled={() => setFocusChain(null)}
+              dark={dark}
+            />
+          </section>
+
+          <section
+            className={`rounded-[32px] p-6 border ${
+              dark
+                ? "bg-white/[0.03] border-white/10"
+                : "bg-black/[0.03] border-black/10"
+            }`}
+          >
+            <div className="mb-6">
+              <h2 className="text-3xl font-semibold">NFTs</h2>
+            </div>
+
+            <NFTTable
+              selectedChains={selectedChains}
+              search={search}
+              dark={dark}
+              onSelectNFT={setSelectedNFT}
+            />
+          </section>
+        </div>
+
+        <SidePanel
+          open={menuOpen}
+          onClose={() => setMenuOpen(false)}
           dark={dark}
         />
 
-        {/* Active filter chips */}
-        {!(selectedChains.length === 0 || selectedChains.includes("All Chains")) && (
-          <div className="mt-4 flex flex-wrap items-center gap-2">
-            {selectedChains.map((chain) => (
-              <div
-                key={chain}
-                className="inline-flex items-center rounded-full bg-white/5 px-2 py-1 text-sm text-white transition hover:scale-105"
-              >
-                <button
-                  onClick={() => setFocusChain(chain)}
-                  className="max-w-[10rem] truncate px-3 text-left"
-                >
-                  {chain}
-                </button>
-                <button
-                  onClick={() =>
-                    setSelectedChains((prev) => {
-                      const next = prev.filter((c) => c !== chain);
-                      return next.length > 0 ? next : ["All Chains"];
-                    })
-                  }
-                  aria-label={`Remove ${chain}`}
-                  className="px-2 text-gray-300 hover:text-white"
-                >
-                  ✕
-                </button>
-              </div>
-            ))}
+        <BackToTop />
+        <BottomNav dark={dark} />
+      </main>
 
-            <button
-              onClick={() => setSelectedChains(["All Chains"])}
-              className="ml-2 rounded-full border border-white/10 bg-transparent px-3 py-1 text-sm text-gray-300 transition hover:bg-white/5"
-            >
-              Clear
-            </button>
-          </div>
-        )}
-
-        {/* 📊 NFT TABLE */}
-        <NFTTable
-          selectedChains={selectedChains}
-          search={search}
-          dark={dark}
-        />
-
-      </div>
-
-      {/* 📂 SIDE PANEL */}
-      <SidePanel
-        open={menuOpen}
-        onClose={() => setMenuOpen(false)}
+      {/* ROOT LEVEL MODAL */}
+      <NFTModal
+        nft={selectedNFT}
+        open={!!selectedNFT}
+        onClose={() => setSelectedNFT(null)}
         dark={dark}
       />
-
-      {/* 🔝 BACK TO TOP */}
-      <BackToTop />
-
-      {/* 📱 BOTTOM NAVIGATION */}
-      <BottomNav dark={dark} />
-    </main>
+    </>
   );
 }

@@ -1,11 +1,29 @@
 "use client";
 
-import { useState, ReactNode } from "react";
-import { useUser, SignOutButton } from "@clerk/nextjs";
+import { useState } from "react";
+import {
+  useUser,
+  SignInButton,
+  SignUpButton,
+  SignOutButton,
+} from "@clerk/nextjs";
 import { useUserProfile } from "@/hooks/useUserProfile";
+import { useTheme } from "@/context/theme-context";
 import { Avatar } from "@/lib/avatars";
 import Link from "next/link";
-import { LogOut, Heart, ThumbsUp, FileText, HelpCircle, Info, Settings } from "lucide-react";
+import {
+  LogOut,
+  LogIn,
+  UserPlus,
+  Heart,
+  HelpCircle,
+  Info,
+  Settings,
+  Users,
+  Upload,
+  UserCircle2,
+  ChevronDown,
+} from "lucide-react";
 
 type Props = {
   open: boolean;
@@ -13,368 +31,291 @@ type Props = {
   dark: boolean;
 };
 
-type SectionProps = {
-  title: string;
-  children: ReactNode;
-  active: string | null;
-  toggle: (title: string) => void;
+type NavProps = {
+  href: string;
+  icon: any;
+  label: string;
   dark: boolean;
+  onClick?: () => void;
 };
 
-function Chevron({ open }: { open: boolean }) {
-  return (
-    <span
-      className={`ml-auto transition-transform duration-300 ${
-        open ? "rotate-180" : ""
-      }`}
-    >
-      ▼
-    </span>
-  );
-}
-
-function Section({ title, children, active, toggle, dark }: SectionProps) {
-  const isOpen = active === title;
-
-  return (
-    <div
-      className={`border-b pb-2 backdrop-blur-xl ${
-        dark ? "border-white/10 bg-white/5" : "border-black/10 bg-black/5"
-      }`}
-    >
-      <button
-        onClick={() => toggle(title)}
-        className="w-full flex items-center gap-2 py-3 font-semibold text-left text-[#FFCC00] hover:opacity-80 transition"
-      >
-        {title}
-        <Chevron open={isOpen} />
-      </button>
-
-      {isOpen && (
-        <div
-          className={`text-sm leading-relaxed pb-3 ${
-            dark ? "text-white/80" : "text-black/70"
-          }`}
-        >
-          {children}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function NavLink({ href, icon: Icon, label, dark, onClick }: any) {
+function NavItem({
+  href,
+  icon: Icon,
+  label,
+  dark,
+  onClick,
+}: NavProps) {
   return (
     <Link
       href={href}
       onClick={onClick}
-      className={`flex items-center gap-3 py-2 px-3 rounded-lg transition ${
-        dark
-          ? "text-white/70 hover:text-white hover:bg-white/5"
-          : "text-black/70 hover:text-black hover:bg-black/5"
-      }`}
+      className={`
+        flex items-center gap-5
+        px-2 py-4
+        transition-all duration-300
+        hover:translate-x-1
+        ${
+          dark
+            ? "text-white/85 hover:text-white"
+            : "text-black/85 hover:text-black"
+        }
+      `}
     >
-      <Icon className="w-4 h-4" />
-      <span>{label}</span>
+      <Icon className="w-9 h-9 text-[#FFCC00]" />
+      <span className="text-[1.55rem] font-semibold tracking-tight">
+        {label}
+      </span>
     </Link>
   );
 }
 
-/* ================= SOCIAL ICONS ================= */
+const iconClass =
+  "w-10 h-10 object-contain cursor-pointer transition duration-300 hover:scale-110";
 
-const iconClass = "w-6 h-6 cursor-pointer transition hover:scale-110";
+const sectionTitle =
+  "text-xs uppercase tracking-[0.28em] font-semibold text-[#FFCC00]/70";
 
-function XIcon() {
-  return (
-    <img
-      src="https://sl.bing.net/c4Puknh5iQS"
-      alt="X"
-      className={iconClass}
-      loading="lazy"
-    />
-  );
-}
-
-function DiscordIcon() {
-  return (
-    <img
-      src="https://img.icons8.com/fluency/48/discord.png"
-      alt="Discord"
-      className={iconClass}
-      loading="lazy"
-    />
-  );
-}
-
-function YouTubeIcon() {
-  return (
-    <img
-      src="https://img.icons8.com/fluency/48/youtube-play.png"
-      alt="YouTube"
-      className={iconClass}
-      loading="lazy"
-    />
-  );
-}
-
-function TikTokIcon() {
-  return (
-    <img
-      src="https://img.icons8.com/fluency/48/tiktok.png"
-      alt="TikTok"
-      className={iconClass}
-      loading="lazy"
-    />
-  );
-}
-
-function InstagramIcon() {
-  return (
-    <img
-      src="https://img.icons8.com/fluency/48/instagram-new.png"
-      alt="Instagram"
-      className={iconClass}
-      loading="lazy"
-    />
-  );
-}
-
-function FacebookIcon() {
-  return (
-    <img
-      src="https://img.icons8.com/fluency/48/facebook-new.png"
-      alt="Facebook"
-      className={iconClass}
-      loading="lazy"
-    />
-  );
-}
-
-/* ================= PANEL ================= */
-
-export default function SidePanel({ open, onClose, dark }: Props) {
-  const [active, setActive] = useState<string | null>(null);
+export default function SidePanel({
+  open,
+  onClose,
+  dark,
+}: Props) {
   const { user: clerkUser } = useUser();
-  const { userProfile, loading } = useUserProfile();
+  const { userProfile } = useUserProfile();
+  const { theme, setTheme } = useTheme();
 
-  const toggle = (title: string) => {
-    setActive(active === title ? null : title);
-  };
+  const [settingsOpen, setSettingsOpen] = useState(false);
 
   return (
     <>
       {/* BACKDROP */}
       {open && (
         <div
-          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
+          className="fixed inset-0 bg-black/50 backdrop-blur-md z-40"
           onClick={onClose}
         />
       )}
 
       {/* PANEL */}
       <div
-        className={`fixed top-0 right-0 h-full w-80 z-50 transform transition-transform duration-300 backdrop-blur-3xl shadow-[0_30px_90px_-35px_rgba(0,0,0,0.75)] overflow-y-auto
-        ${open ? "translate-x-0" : "translate-x-full"}
-        ${dark ? "bg-black/50 text-white border-white/10" : "bg-white/70 text-black border-black/10"} border-l`}
+        className={`
+          fixed top-0 right-0 h-full w-[22rem] z-50
+          transition-transform duration-500 ease-out
+          overflow-y-auto overflow-x-hidden
+          backdrop-blur-3xl
+          shadow-[0_40px_120px_rgba(0,0,0,0.85)]
+          border-l border-white/10
+          scrollbar-hide
+          ${open ? "translate-x-0" : "translate-x-full"}
+          ${dark ? "bg-black/70 text-white" : "bg-white/80 text-black"}
+        `}
       >
-        <div className="p-5 space-y-4">
-          
-          {/* USER SECTION */}
-          {clerkUser && userProfile && !loading && (
-            <div
-              className={`p-4 rounded-lg mb-4 ${
-                dark ? "bg-white/10" : "bg-black/10"
-              }`}
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <Avatar avatar={userProfile.avatar} size="md" />
-                <div>
-                  <p className="font-semibold text-[#FFCC00]">
-                    {userProfile.username}
-                  </p>
-                  <p className={`text-xs ${dark ? "text-white/60" : "text-black/60"}`}>
-                    {userProfile.email}
-                  </p>
-                </div>
+        <div className="p-7">
+
+          {/* USER CARD */}
+          <div
+            className={`
+              rounded-2xl
+              p-5
+              backdrop-blur-xl
+              border border-white/10
+              ${dark ? "bg-white/5" : "bg-black/5"}
+            `}
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#FFCC00] to-yellow-500 flex items-center justify-center shadow-lg">
+                {clerkUser && userProfile ? (
+                  <Avatar avatar={userProfile.avatar} size="md" />
+                ) : (
+                  <UserCircle2 className="w-10 h-10 text-black" />
+                )}
               </div>
-              <div className="space-y-1">
-                <NavLink
-                  href="/profile"
-                  icon={() => null}
-                  label="My Profile"
-                  dark={dark}
-                  onClick={onClose}
-                />
-                <NavLink
-                  href="/profile/likes"
-                  icon={ThumbsUp}
-                  label="My Likes"
-                  dark={dark}
-                  onClick={onClose}
-                />
-                <NavLink
-                  href="/profile/favorites"
-                  icon={Heart}
-                  label="My Favorites"
-                  dark={dark}
-                  onClick={onClose}
-                />
-                <NavLink
-                  href="/profile/submissions"
-                  icon={FileText}
-                  label="My Submissions"
-                  dark={dark}
-                  onClick={onClose}
-                />
+
+              <div>
+                <h2 className="text-2xl font-bold text-white">
+                  {clerkUser && userProfile
+                    ? userProfile.username
+                    : "Guest User"}
+                </h2>
+                <p className="text-base text-white/50">
+                  {clerkUser && userProfile
+                    ? userProfile.email
+                    : "Not signed in"}
+                </p>
               </div>
             </div>
-          )}
+          </div>
 
-          {/* NAVIGATION */}
-          {clerkUser && userProfile && !loading && (
+          <div className="h-6" />
+
+          {/* AUTH */}
+          {!clerkUser ? (
             <>
-              <div
-                className={`border-b ${dark ? "border-white/10" : "border-black/10"}`}
-              >
-                <h3 className="text-xs uppercase tracking-wider font-semibold text-[#FFCC00]/70 px-3 py-2">
-                  Settings
-                </h3>
-                <NavLink
-                  href="/settings"
-                  icon={Settings}
-                  label="Settings"
-                  dark={dark}
-                  onClick={onClose}
-                />
-                <NavLink
-                  href="/help"
-                  icon={HelpCircle}
-                  label="Help Center"
-                  dark={dark}
-                  onClick={onClose}
-                />
-                <NavLink
-                  href="/about"
-                  icon={Info}
-                  label="About NFTs On Chain"
-                  dark={dark}
-                  onClick={onClose}
-                />
-              </div>
-
-              {/* SIGN OUT */}
-              <SignOutButton redirectUrl="/">
-                <button
-                  className={`w-full flex items-center justify-center gap-2 py-2 px-3 rounded-lg transition font-medium
-                  ${
-                    dark
-                      ? "text-red-400 hover:bg-red-400/10"
-                      : "text-red-600 hover:bg-red-600/10"
-                  }`}
-                >
-                  <LogOut className="w-4 h-4" />
-                  Sign Out
+              <SignInButton mode="modal">
+                <button className="w-full py-5 rounded-2xl bg-[#FFCC00] text-black font-bold text-2xl flex items-center justify-center gap-3 hover:scale-[1.02] transition">
+                  <LogIn className="w-7 h-7" />
+                  Sign In
                 </button>
-              </SignOutButton>
+              </SignInButton>
+
+              <div className="h-3" />
+
+              <SignUpButton mode="modal">
+                <button className="w-full py-5 rounded-2xl bg-red-500/15 border border-red-400/20 text-red-300 font-bold text-2xl flex items-center justify-center gap-3 hover:scale-[1.02] transition">
+                  <UserPlus className="w-7 h-7" />
+                  Sign Up
+                </button>
+              </SignUpButton>
             </>
+          ) : (
+            <SignOutButton redirectUrl="/">
+              <button className="w-full py-5 rounded-2xl bg-red-500/15 border border-red-400/20 text-red-300 font-bold text-2xl flex items-center justify-center gap-3 hover:scale-[1.02] transition">
+                <LogOut className="w-7 h-7" />
+                Sign Out
+              </button>
+            </SignOutButton>
           )}
 
-          {/* NOT LOGGED IN */}
-          {!clerkUser && (
-            <>
-              <Section
-                title="About NFTs OnChain"
-                active={active}
-                toggle={toggle}
-                dark={dark}
-              >
-                NFTs OnChain is a cross-chain NFT discovery hub where NFT
-                projects, communities, and identities come together to explore,
-                learn, and connect across ecosystems.
-              </Section>
+          <div className="h-6" />
 
-              <Section
-                title="Join the Community"
-                active={active}
-                toggle={toggle}
-                dark={dark}
-              >
-                Sign in to like collections, create favorites, and submit your
-                NFT projects to be featured.
-              </Section>
+          {/* WORKSPACE */}
+          <div>
+            <h3 className={sectionTitle}>WORKSPACE</h3>
 
-              <div className={`border-b ${dark ? "border-white/10" : "border-black/10"}`}>
-                <h3 className="text-xs uppercase tracking-wider font-semibold text-[#FFCC00]/70 px-3 py-2">
-                  Resources
-                </h3>
-                <NavLink
-                  href="/help"
-                  icon={HelpCircle}
-                  label="Help Center"
-                  dark={dark}
-                  onClick={onClose}
-                />
-                <NavLink
-                  href="/about"
-                  icon={Info}
-                  label="About"
-                  dark={dark}
-                  onClick={onClose}
-                />
+            <div className="h-2" />
+
+            <NavItem
+              href="/community"
+              icon={Users}
+              label="Join Community"
+              dark={dark}
+              onClick={onClose}
+            />
+
+            <div className="h-2" />
+
+            <NavItem
+              href="/profile/favorites"
+              icon={Heart}
+              label="Favorites"
+              dark={dark}
+              onClick={onClose}
+            />
+
+            <div className="h-2" />
+
+            <NavItem
+              href="/submit"
+              icon={Upload}
+              label="Submit"
+              dark={dark}
+              onClick={onClose}
+            />
+          </div>
+
+          <div className="h-6" />
+
+          {/* RESOURCES */}
+          <div>
+            <h3 className={sectionTitle}>RESOURCES</h3>
+
+            <div className="h-2" />
+
+            {/* SETTINGS DROPDOWN */}
+            <button
+              onClick={() => setSettingsOpen(!settingsOpen)}
+              className="w-full flex items-center justify-between px-2 py-4"
+            >
+              <div className="flex items-center gap-5">
+                <Settings className="w-9 h-9 text-[#FFCC00]" />
+                <span className="text-[1.55rem] font-semibold tracking-tight">
+                  Settings
+                </span>
               </div>
-            </>
-          )}
 
-          {/* SOCIALS */}
-          <div className={`pt-4 border-t ${dark ? "border-white/10" : "border-black/10"}`}>
-            <h3 className="text-xs uppercase tracking-wider font-semibold text-[#FFCC00]/70 px-3 py-2">
-              Follow Us
+              <ChevronDown
+                className={`transition ${
+                  settingsOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+
+            {settingsOpen && (
+              <div className="ml-14 mt-2 space-y-2">
+                {["system", "light", "dark"].map((mode) => (
+                  <button
+                    key={mode}
+                    onClick={() =>
+                      setTheme(
+                        mode as "system" | "light" | "dark"
+                      )
+                    }
+                    className={`block w-full text-left px-4 py-3 rounded-xl transition ${
+                      theme === mode
+                        ? "bg-[#FFCC00] text-black"
+                        : dark
+                        ? "text-white/70 hover:bg-white/5"
+                        : "text-black/70 hover:bg-black/5"
+                    }`}
+                  >
+                    {mode.charAt(0).toUpperCase() + mode.slice(1)}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            <div className="h-2" />
+
+            <NavItem
+              href="/help"
+              icon={HelpCircle}
+              label="Help Center"
+              dark={dark}
+              onClick={onClose}
+            />
+
+            <div className="h-2" />
+
+            <NavItem
+              href="/about"
+              icon={Info}
+              label="About"
+              dark={dark}
+              onClick={onClose}
+            />
+          </div>
+
+          <div className="h-6" />
+
+          {/* FOLLOW */}
+          <div className="pb-8">
+            <h3 className={`${sectionTitle} mb-8`}>
+              FOLLOW NFTs ONCHAIN
             </h3>
-            <div className="flex flex-wrap gap-4 items-center justify-center px-3 py-3">
-              <a
-                href="https://x.com/nfts_onchain"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <XIcon />
+
+            <div className="flex items-center justify-between gap-2 px-1">
+              <a href="https://x.com/nfts_onchain" target="_blank" rel="noreferrer">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/twitterx.png" className={iconClass} alt="X" />
               </a>
-              <a
-                href="https://discord.gg/WvtMNVQjcw"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <DiscordIcon />
+              <a href="https://discord.gg/WvtMNVQjcw" target="_blank" rel="noreferrer">
+                <img src="https://img.icons8.com/fluency/48/discord.png" className={iconClass} alt="Discord" />
               </a>
-              <a
-                href="https://youtube.com/@nfts_onchain"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <YouTubeIcon />
+              <a href="https://youtube.com/@nfts_onchain" target="_blank" rel="noreferrer">
+                <img src="https://img.icons8.com/fluency/48/youtube-play.png" className={iconClass} alt="YouTube" />
               </a>
-              <a
-                href="https://www.tiktok.com/@nfts_onchain"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <TikTokIcon />
+              <a href="https://www.tiktok.com/@nfts_onchain" target="_blank" rel="noreferrer">
+                <img src="https://img.icons8.com/fluency/48/tiktok.png" className={iconClass} alt="TikTok" />
               </a>
-              <a
-                href="https://www.instagram.com/nfts_onchain"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <InstagramIcon />
+              <a href="https://www.instagram.com/nfts_onchain" target="_blank" rel="noreferrer">
+                <img src="https://img.icons8.com/fluency/48/instagram-new.png" className={iconClass} alt="Instagram" />
               </a>
-              <a
-                href="https://www.facebook.com/share/1AxrJpxfwm/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FacebookIcon />
+              <a href="https://www.facebook.com/share/1AxrJpxfwm/" target="_blank" rel="noreferrer">
+                <img src="https://img.icons8.com/fluency/48/facebook-new.png" className={iconClass} alt="Facebook" />
               </a>
             </div>
           </div>
+
         </div>
       </div>
     </>

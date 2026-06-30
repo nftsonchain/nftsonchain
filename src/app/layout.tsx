@@ -1,41 +1,28 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const titleIcon = new URL("../images/yhxyWdcf_400x400.jpg", import.meta.url);
-
-export const metadata: Metadata = {
-  title: "NFTs OnChain",
-  description: "Discover NFTs on-chain across marketplaces.",
-  icons: {
-    icon: titleIcon,
-  },
-};
+import { ThemeProvider } from "@/context/theme-context";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <ClerkProvider>
-      <html
-        lang="en"
-        className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className="
+          min-h-screen
+          antialiased
+          overflow-x-hidden
+          transition-colors duration-300
+        "
       >
-        <body className="min-h-full flex flex-col">{children}</body>
-      </html>
-    </ClerkProvider>
+        <ClerkProvider>
+          <ThemeProvider>
+            {children}
+          </ThemeProvider>
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }

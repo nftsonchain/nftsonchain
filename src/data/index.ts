@@ -17,7 +17,7 @@ import { immutableNFTs } from "./immutable";
 import { cosmosNFTs } from "./cosmos";
 import { bitcoinNFTs } from "./bitcoin";
 import { waxNFTs } from "./wax";
-import { tonNFTs } from "./ton";
+import { gramNFTs } from "./gram";
 import { injectiveNFTs } from "./injective";
 import { seiNFTs } from "./sei";
 import { celestiaNFTs } from "./celestia";
@@ -49,7 +49,7 @@ export const allNFTs = [
   ...cosmosNFTs,
   ...bitcoinNFTs,
   ...waxNFTs,
-  ...tonNFTs,
+  ...gramNFTs,
   ...injectiveNFTs,
   ...seiNFTs,
   ...celestiaNFTs,
