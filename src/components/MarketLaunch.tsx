@@ -1,7 +1,10 @@
 "use client";
 
+type Props = {
+  dark: boolean;
+};
+
 const groups = [
-  // ETH / EVM
   {
     base: "blue",
     items: [
@@ -25,8 +28,6 @@ const groups = [
       { name: "Mooar", url: "https://mooar.com" },
     ],
   },
-
-  // SOLANA
   {
     base: "purple",
     items: [
@@ -45,8 +46,6 @@ const groups = [
       { name: "LaunchLab", url: "https://launchlab.app" },
     ],
   },
-
-  // BNB / MULTI
   {
     base: "yellow",
     items: [
@@ -62,8 +61,6 @@ const groups = [
       { name: "Mintsquare", url: "https://mintsquare.io" },
     ],
   },
-
-  // BTC / STX / TON / WAX / FLOW / GAMING
   {
     base: "green",
     items: [
@@ -83,8 +80,6 @@ const groups = [
       { name: "Flowverse", url: "https://flowverse.co" },
     ],
   },
-
-  // XRP / CARDANO / AVAX / CRONOS / TEZOS / SPECIALIZED
   {
     base: "red",
     items: [
@@ -105,6 +100,7 @@ const groups = [
     ],
   },
 ];
+
 function shade(base: string, level: number) {
   const map: Record<string, string[]> = {
     blue: ["bg-blue-700", "bg-blue-600", "bg-blue-500", "bg-blue-400"],
@@ -124,7 +120,6 @@ const marketplaces = groups.flatMap((group) =>
   }))
 );
 
-// dynamic sizing stays intact
 function sizeClass(name: string) {
   const len = name.length;
 
@@ -135,17 +130,19 @@ function sizeClass(name: string) {
   return "w-[175px]";
 }
 
-export default function MarketLaunch() {
+export default function MarketLaunch({ dark }: Props) {
   return (
     <div className="w-full">
-      {/* TITLE */}
       <div className="mb-7">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+        <h2
+          className={`text-2xl md:text-3xl font-semibold tracking-tight ${
+            dark ? "text-white" : "text-black"
+          }`}
+        >
           NFT Marketplaces & Launchpads
         </h2>
       </div>
 
-      {/* BUBBLES */}
       <div className="flex flex-wrap gap-2">
         {marketplaces.map((item) => (
           <a
@@ -155,27 +152,17 @@ export default function MarketLaunch() {
             rel="noopener noreferrer"
             className={`
               inline-flex items-center justify-center
-
               ${sizeClass(item.name)}
-
               h-[34px]
-
               px-2.5
-
               whitespace-nowrap
-
               rounded-full
-
               text-[14px] md:text-[15px]
               font-bold
-
               text-white
               ${item.color}
-
               border border-white/10
-
               transition-all duration-300 ease-out
-
               hover:scale-[1.03]
               hover:shadow-md
               hover:brightness-110

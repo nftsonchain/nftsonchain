@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTheme } from "@/context/theme-context";
 
 import Navbar from "@/components/Navbar";
 import Marquee from "@/components/Marquee";
@@ -22,7 +23,7 @@ export default function Home() {
   const [focusChain, setFocusChain] = useState<string | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [search, setSearch] = useState("");
-  const [dark] = useState(true);
+  const { dark } = useTheme();
 
   const [selectedNFT, setSelectedNFT] = useState<NFT | null>(null);
 
@@ -39,8 +40,6 @@ export default function Home() {
           onMenuClick={() => setMenuOpen(true)}
           search={search}
           setSearch={setSearch}
-          dark={dark}
-          setDark={() => {}}
         />
 
         <Marquee dark={dark} />

@@ -7,9 +7,9 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { user } = await auth();
+    const { userId } = await auth();
 
-    if (!user) {
+    if (!userId) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 401 }
@@ -20,15 +20,17 @@ export async function POST(
 
     await connectDB();
 
-    // Check if NFT exists
     const nft = await NFT.findById(id);
+
     if (!nft) {
-      return NextResponse.json({ error: "NFT not found" }, { status: 404 });
+      return NextResponse.json(
+        { error: "NFT not found" },
+        { status: 404 }
+      );
     }
 
-    // Check if already favorited
     const existingFavorite = await Favorite.findOne({
-      userId: user.id,
+      userId,
       nftId: id,
     });
 
@@ -39,21 +41,25 @@ export async function POST(
       );
     }
 
-    // Create favorite
     await Favorite.create({
-      userId: user.id,
+      userId,
       nftId: id,
     });
 
-    // Increment favorites count
-    await NFT.findByIdAndUpdate(id, { $inc: { favoritesCount: 1 } });
+    await NFT.findByIdAndUpdate(id, {
+      $inc: { favoritesCount: 1 },
+    });
 
     return NextResponse.json(
-      { success: true, message: "Favorited" },
+      {
+        success: true,
+        message: "Favorited",
+      },
       { status: 201 }
     );
   } catch (error) {
     console.error("Favorite NFT error:", error);
+
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
@@ -66,9 +72,9 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { user } = await auth();
+    const { userId } = await auth();
 
-    if (!user) {
+    if (!userId) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 401 }
@@ -79,9 +85,8 @@ export async function DELETE(
 
     await connectDB();
 
-    // Remove favorite
     const result = await Favorite.findOneAndDelete({
-      userId: user.id,
+      userId,
       nftId: id,
     });
 
@@ -92,12 +97,17 @@ export async function DELETE(
       );
     }
 
-    // Decrement favorites count
-    await NFT.findByIdAndUpdate(id, { $inc: { favoritesCount: -1 } });
+    await NFT.findByIdAndUpdate(id, {
+      $inc: { favoritesCount: -1 },
+    });
 
-    return NextResponse.json({ success: true, message: "Removed from favorites" });
+    return NextResponse.json({
+      success: true,
+      message: "Removed from favorites",
+    });
   } catch (error) {
     console.error("Remove favorite error:", error);
+
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
@@ -110,23 +120,28 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { user } = await auth();
+    const { userId } = await auth();
     const { id } = await params;
 
-    if (!user) {
-      return NextResponse.json({ favorited: false });
+    if (!userId) {
+      return NextResponse.json({
+        favorited: false,
+      });
     }
 
     await connectDB();
 
     const favorite = await Favorite.findOne({
-      userId: user.id,
+      userId,
       nftId: id,
     });
 
-    return NextResponse.json({ favorited: !!favorite });
+    return NextResponse.json({
+      favorited: !!favorite,
+    });
   } catch (error) {
     console.error("Check favorite error:", error);
+
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

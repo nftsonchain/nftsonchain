@@ -4,9 +4,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
-    const { user } = await auth();
+    const { userId } = await auth();
 
-    if (!user) {
+    if (!userId) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 401 }
@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     const nftData = await req.json();
 
     // Validate required fields
-    if (!nftData.name || !nftData.chain) {
+    if (!nftData?.name || !nftData?.chain) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
 
     // Create submission
     const submission = await Submission.create({
-      userId: user.id,
+      userId,
       status: "pending",
       nftData,
     });
@@ -41,6 +41,7 @@ export async function POST(req: NextRequest) {
     );
   } catch (error) {
     console.error("Create submission error:", error);
+
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
@@ -50,9 +51,9 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
   try {
-    const { user } = await auth();
+    const { userId } = await auth();
 
-    if (!user) {
+    if (!userId) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 401 }
@@ -64,7 +65,10 @@ export async function GET(req: NextRequest) {
 
     await connectDB();
 
-    const filter: any = { userId: user.id };
+    const filter: Record<string, string> = {
+      userId,
+    };
+
     if (status) {
       filter.status = status;
     }
@@ -73,9 +77,13 @@ export async function GET(req: NextRequest) {
       .sort({ createdAt: -1 })
       .lean();
 
-    return NextResponse.json({ submissions });
+    return NextResponse.json({
+      success: true,
+      submissions,
+    });
   } catch (error) {
     console.error("Get submissions error:", error);
+
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

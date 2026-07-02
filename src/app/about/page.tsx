@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTheme } from "@/context/theme-context";
 import Navbar from "@/components/Navbar";
 import BottomNav from "@/components/BottomNav";
 import SidePanel from "@/components/SidePanel";
@@ -71,7 +72,7 @@ const SUPPORTED_CHAINS = [
 ];
 
 export default function AboutPage() {
-  const [dark, setDark] = useState(true);
+  const { dark } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const [search, setSearch] = useState("");
 
@@ -87,8 +88,6 @@ export default function AboutPage() {
         onMenuClick={() => setMenuOpen(true)}
         search={search}
         setSearch={setSearch}
-        dark={dark}
-        setDark={setDark}
       />
 
       {/* EXPANDED MAIN CONTAINER */}

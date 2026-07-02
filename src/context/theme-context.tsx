@@ -46,20 +46,19 @@ export function ThemeProvider({
 
     root.classList.remove("dark");
 
-    let isDark = false;
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
 
-    if (theme === "dark") {
+    const isDark =
+      theme === "dark" ||
+      (theme === "system" && prefersDark);
+
+    if (isDark) {
       root.classList.add("dark");
-      isDark = true;
-    }
-
-    // Light + System = light (your current preference)
-    if (theme === "light" || theme === "system") {
-      isDark = false;
     }
 
     setDark(isDark);
-
     localStorage.setItem("theme", theme);
   }, [theme, mounted]);
 

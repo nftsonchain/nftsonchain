@@ -7,9 +7,9 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { user } = await auth();
+    const { userId } = await auth();
 
-    if (!user) {
+    if (!userId) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 401 }
@@ -22,13 +22,17 @@ export async function POST(
 
     // Check if NFT exists
     const nft = await NFT.findById(id);
+
     if (!nft) {
-      return NextResponse.json({ error: "NFT not found" }, { status: 404 });
+      return NextResponse.json(
+        { error: "NFT not found" },
+        { status: 404 }
+      );
     }
 
     // Check if already liked
     const existingLike = await Like.findOne({
-      userId: user.id,
+      userId,
       nftId: id,
     });
 
@@ -41,19 +45,25 @@ export async function POST(
 
     // Create like
     await Like.create({
-      userId: user.id,
+      userId,
       nftId: id,
     });
 
     // Increment likes count
-    await NFT.findByIdAndUpdate(id, { $inc: { likesCount: 1 } });
+    await NFT.findByIdAndUpdate(id, {
+      $inc: { likesCount: 1 },
+    });
 
     return NextResponse.json(
-      { success: true, message: "Liked" },
+      {
+        success: true,
+        message: "Liked",
+      },
       { status: 201 }
     );
   } catch (error) {
     console.error("Like NFT error:", error);
+
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
@@ -66,9 +76,9 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { user } = await auth();
+    const { userId } = await auth();
 
-    if (!user) {
+    if (!userId) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 401 }
@@ -81,7 +91,7 @@ export async function DELETE(
 
     // Remove like
     const result = await Like.findOneAndDelete({
-      userId: user.id,
+      userId,
       nftId: id,
     });
 
@@ -93,11 +103,17 @@ export async function DELETE(
     }
 
     // Decrement likes count
-    await NFT.findByIdAndUpdate(id, { $inc: { likesCount: -1 } });
+    await NFT.findByIdAndUpdate(id, {
+      $inc: { likesCount: -1 },
+    });
 
-    return NextResponse.json({ success: true, message: "Unliked" });
+    return NextResponse.json({
+      success: true,
+      message: "Unliked",
+    });
   } catch (error) {
     console.error("Unlike NFT error:", error);
+
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
@@ -110,23 +126,28 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { user } = await auth();
+    const { userId } = await auth();
     const { id } = await params;
 
-    if (!user) {
-      return NextResponse.json({ liked: false });
+    if (!userId) {
+      return NextResponse.json({
+        liked: false,
+      });
     }
 
     await connectDB();
 
     const like = await Like.findOne({
-      userId: user.id,
+      userId,
       nftId: id,
     });
 
-    return NextResponse.json({ liked: !!like });
+    return NextResponse.json({
+      liked: !!like,
+    });
   } catch (error) {
     console.error("Check like error:", error);
+
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

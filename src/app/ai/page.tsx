@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Send, Loader } from "lucide-react";
+import { useTheme } from "@/context/theme-context";
 import Navbar from "@/components/Navbar";
 import BottomNav from "@/components/BottomNav";
 import SidePanel from "@/components/SidePanel";
@@ -26,7 +27,7 @@ export default function AIPage() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [dark, setDark] = useState(true);
+  const { dark } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const [search, setSearch] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -104,8 +105,6 @@ export default function AIPage() {
         onMenuClick={() => setMenuOpen(true)}
         search={search}
         setSearch={setSearch}
-        dark={dark}
-        setDark={setDark}
       />
 
       <div className="min-h-screen flex items-center justify-center px-6 py-12">

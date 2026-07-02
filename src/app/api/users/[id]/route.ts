@@ -16,12 +16,16 @@ export async function GET(
       .lean();
 
     if (!user) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
+      return NextResponse.json(
+        { error: "User not found" },
+        { status: 404 }
+      );
     }
 
     return NextResponse.json(user);
   } catch (error) {
     console.error("Get user error:", error);
+
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
@@ -35,9 +39,9 @@ export async function PUT(
 ) {
   try {
     const { id } = await params;
-    const { user: authUser } = await auth();
+    const { userId } = await auth();
 
-    if (!authUser || authUser.id !== id) {
+    if (!userId || userId !== id) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 401 }
@@ -48,7 +52,7 @@ export async function PUT(
 
     await connectDB();
 
-    // If username is being updated, check uniqueness
+    // Check username uniqueness
     if (username) {
       const existingUser = await User.findOne({
         username,
@@ -65,13 +69,16 @@ export async function PUT(
 
     const updatedUser = await User.findOneAndUpdate(
       { clerkId: id },
-      { ...(username && { username }) },
+      {
+        ...(username && { username }),
+      },
       { new: true }
     ).select("-likedNFTs -favoriteNFTs");
 
     return NextResponse.json(updatedUser);
   } catch (error) {
     console.error("Update user error:", error);
+
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

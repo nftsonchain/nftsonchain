@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTheme } from "@/context/theme-context";
 import Navbar from "@/components/Navbar";
 import BottomNav from "@/components/BottomNav";
 import SidePanel from "@/components/SidePanel";
@@ -55,7 +56,7 @@ const FAQS: FAQItem[] = [
 ];
 
 export default function HelpPage() {
-  const [dark, setDark] = useState(true);
+  const { dark } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -76,8 +77,6 @@ export default function HelpPage() {
         onMenuClick={() => setMenuOpen(true)}
         search={search}
         setSearch={setSearch}
-        dark={dark}
-        setDark={setDark}
       />
 
       {/* CENTERED MAIN CONTAINER */}

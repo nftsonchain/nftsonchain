@@ -10,31 +10,26 @@ import { useTheme } from "@/context/theme-context";
 type Props = {
   onMenuClick: () => void;
   search: string;
-  setSearch: (value: string) => void;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
+  dark?: boolean;
+  setDark?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function Navbar({
   onMenuClick,
   search,
   setSearch,
+  dark,
 }: Props) {
-  const { theme } = useTheme();
+  const { dark: themeDark } = useTheme();
 
-  // Force system + light to still use dark mode styling
-  const dark =
-    theme === "dark" ||
-    theme === "light" ||
-    theme === "system";
+  const navDark = dark ?? themeDark;
 
   return (
     <header
       className={`
         sticky top-0 z-50 w-full border-b backdrop-blur-2xl
-        ${
-          dark
-            ? "bg-black/60 border-white/10"
-            : "bg-white/80 border-black/10"
-        }
+        ${navDark ? "bg-black/60 border-white/10" : "bg-white/80 border-black/10"}
       `}
     >
       <div className="max-w-7xl mx-auto px-5 lg:px-6 h-20 flex items-center gap-6">
@@ -65,11 +60,10 @@ export default function Navbar({
           <div
             className={`
               flex items-center gap-4 w-full max-w-xl
-              px-6 py-4 rounded-2xl
-              border backdrop-blur-2xl
+              px-6 py-4 rounded-2xl border backdrop-blur-2xl
               transition-all duration-300
               ${
-                dark
+                navDark
                   ? "bg-white/5 border-white/10 shadow-[0_0_45px_-22px_rgba(255,204,0,0.3)]"
                   : "bg-white border-black/10"
               }
@@ -84,11 +78,7 @@ export default function Navbar({
               onChange={(e) => setSearch(e.target.value)}
               className={`
                 w-full bg-transparent outline-none text-base font-medium
-                ${
-                  dark
-                    ? "text-white placeholder:text-gray-500"
-                    : "text-black placeholder:text-gray-400"
-                }
+                ${navDark ? "text-white placeholder:text-gray-500" : "text-black placeholder:text-gray-400"}
               `}
             />
           </div>
@@ -98,22 +88,17 @@ export default function Navbar({
         <div className="flex items-center gap-3 flex-shrink-0 min-w-[290px] justify-end">
 
           <SignedOut>
-
-            {/* SIGN IN */}
             <Link
               href="/sign-in"
               className={`
                 inline-flex items-center justify-center
-                px-7 py-3
-                min-w-[70px]
-                rounded-xl
-                whitespace-nowrap
-                text-sm md:text-base
-                font-bold
+                px-7 py-3 min-w-[70px]
+                rounded-xl whitespace-nowrap
+                text-sm md:text-base font-bold
                 border backdrop-blur-xl
                 transition-all duration-300 ease-out
                 ${
-                  dark
+                  navDark
                     ? "bg-white/5 border-white/10 text-white hover:bg-white/10"
                     : "bg-white border-black/10 text-black hover:bg-black/5"
                 }
@@ -122,17 +107,13 @@ export default function Navbar({
               Sign In
             </Link>
 
-            {/* SIGN UP */}
             <Link
               href="/sign-up"
               className="
                 inline-flex items-center justify-center
-                px-8 py-3
-                min-w-[70px]
-                rounded-xl
-                whitespace-nowrap
-                text-sm md:text-base
-                font-bold text-black
+                px-8 py-3 min-w-[70px]
+                rounded-xl whitespace-nowrap
+                text-sm md:text-base font-bold text-black
                 bg-gradient-to-r from-[#FFCC00] to-[#FFD84D]
                 shadow-[0_12px_30px_-10px_rgba(255,204,0,0.65)]
                 hover:shadow-[0_16px_40px_-10px_rgba(255,204,0,0.85)]
@@ -142,7 +123,6 @@ export default function Navbar({
             >
               Sign Up
             </Link>
-
           </SignedOut>
 
           <SignedIn>
@@ -155,14 +135,13 @@ export default function Navbar({
             />
           </SignedIn>
 
-          {/* MENU BUTTON */}
           <button
             onClick={onMenuClick}
             className={`
               w-12 h-12 rounded-xl flex items-center justify-center border
               transition-all duration-300
               ${
-                dark
+                navDark
                   ? "bg-white/5 border-white/10 hover:bg-white/10"
                   : "bg-black/5 border-black/10 hover:bg-black/10"
               }
