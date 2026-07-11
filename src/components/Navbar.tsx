@@ -1,156 +1,67 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
-import { Search, Menu } from "lucide-react";
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import logoImage from "@/images/yhxyWdcf_400x400.jpg";
+import { Search } from "lucide-react";
 import { useTheme } from "@/context/theme-context";
+import Link from "next/link";
 
 type Props = {
-  onMenuClick: () => void;
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
-  dark?: boolean;
-  setDark?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function Navbar({
-  onMenuClick,
   search,
   setSearch,
-  dark,
 }: Props) {
-  const { dark: themeDark } = useTheme();
-
-  const navDark = dark ?? themeDark;
+  const { dark } = useTheme();
 
   return (
     <header
       className={`
-        sticky top-0 z-50 w-full border-b backdrop-blur-2xl
-        ${navDark ? "bg-black/60 border-white/10" : "bg-white/80 border-black/10"}
+        sticky top-0 z-30 w-full border-b backdrop-blur-2xl transition-colors duration-300
+        ${dark ? "bg-[#0b0f1a]/60 border-white/10" : "bg-white/80 border-black/10"}
       `}
     >
-      <div className="max-w-7xl mx-auto px-5 lg:px-6 h-20 flex items-center gap-6">
-
-        {/* LOGO */}
-        <div className="flex items-center flex-shrink-0 min-w-[230px]">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full overflow-hidden border border-white/10 shadow-md">
-              <Image
-                src={logoImage}
-                alt="NFTs OnChain Logo"
-                width={48}
-                height={48}
-                className="object-cover"
-                priority
-              />
-            </div>
-
-            <h1 className="font-extrabold text-xl md:text-2xl text-[#FFCC00] flex items-center gap-2">
-              NFTs OnChain
-              <span className="text-[#FFCC00] text-2xl leading-none">◉</span>
-            </h1>
+      <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+        
+        {/* LOGO LINK */}
+        <div className="flex items-center">
+          <Link href="/" className="flex items-center gap-2">
+            <span className="font-extrabold text-lg md:text-xl tracking-tight text-[#FFCC00]">
+              NFTs OnChain ◉
+            </span>
           </Link>
         </div>
 
         {/* SEARCH */}
-        <div className="flex-1 flex justify-center">
+        <div className="flex flex-1 justify-center px-2 sm:px-4 min-w-0">
           <div
             className={`
-              flex items-center gap-4 w-full max-w-xl
-              px-6 py-4 rounded-2xl border backdrop-blur-2xl
-              transition-all duration-300
+              flex w-full max-w-xl items-center gap-3
+              rounded-2xl border px-4 py-2.5 shadow-sm transition-all duration-300
               ${
-                navDark
-                  ? "bg-white/5 border-white/10 shadow-[0_0_45px_-22px_rgba(255,204,0,0.3)]"
-                  : "bg-white border-black/10"
+                dark
+                  ? "border-white/10 bg-white/5 focus-within:border-[#FFCC00]/50"
+                  : "border-black/10 bg-white focus-within:border-[#FFCC00]/50"
               }
             `}
           >
-            <Search className="w-5 h-7 text-gray-400 flex-shrink-0" />
+            <Search className="w-4 h-4 text-gray-400 flex-shrink-0" />
 
             <input
               type="text"
-              placeholder="Search NFTs, marketplaces, chains, supply..."
+              placeholder="Search Collections..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className={`
-                w-full bg-transparent outline-none text-base font-medium
-                ${navDark ? "text-white placeholder:text-gray-500" : "text-black placeholder:text-gray-400"}
+                w-full bg-transparent outline-none text-sm font-medium
+                ${dark ? "text-white placeholder:text-gray-500" : "text-black placeholder:text-gray-400"}
               `}
             />
           </div>
         </div>
 
-        {/* AUTH + MENU */}
-        <div className="flex items-center gap-3 flex-shrink-0 min-w-[290px] justify-end">
 
-          <SignedOut>
-            <Link
-              href="/sign-in"
-              className={`
-                inline-flex items-center justify-center
-                px-7 py-3 min-w-[70px]
-                rounded-xl whitespace-nowrap
-                text-sm md:text-base font-bold
-                border backdrop-blur-xl
-                transition-all duration-300 ease-out
-                ${
-                  navDark
-                    ? "bg-white/5 border-white/10 text-white hover:bg-white/10"
-                    : "bg-white border-black/10 text-black hover:bg-black/5"
-                }
-              `}
-            >
-              Sign In
-            </Link>
-
-            <Link
-              href="/sign-up"
-              className="
-                inline-flex items-center justify-center
-                px-8 py-3 min-w-[70px]
-                rounded-xl whitespace-nowrap
-                text-sm md:text-base font-bold text-black
-                bg-gradient-to-r from-[#FFCC00] to-[#FFD84D]
-                shadow-[0_12px_30px_-10px_rgba(255,204,0,0.65)]
-                hover:shadow-[0_16px_40px_-10px_rgba(255,204,0,0.85)]
-                transition-all duration-300 ease-out
-                hover:scale-[1.03]
-              "
-            >
-              Sign Up
-            </Link>
-          </SignedOut>
-
-          <SignedIn>
-            <UserButton
-              appearance={{
-                elements: {
-                  avatarBox: "w-11 h-11",
-                },
-              }}
-            />
-          </SignedIn>
-
-          <button
-            onClick={onMenuClick}
-            className={`
-              w-12 h-12 rounded-xl flex items-center justify-center border
-              transition-all duration-300
-              ${
-                navDark
-                  ? "bg-white/5 border-white/10 hover:bg-white/10"
-                  : "bg-black/5 border-black/10 hover:bg-black/10"
-              }
-            `}
-          >
-            <Menu className="w-6 h-6" />
-          </button>
-
-        </div>
       </div>
     </header>
   );

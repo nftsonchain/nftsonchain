@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  ReactNode,
-} from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 type Theme = "system" | "light" | "dark";
 
@@ -14,68 +8,50 @@ type ThemeContextType = {
   theme: Theme;
   setTheme: (theme: Theme) => void;
   dark: boolean;
+  sidebarOpen: boolean;
+  setSidebarOpen: (open: boolean) => void;
 };
 
-const ThemeContext = createContext<
-  ThemeContextType | undefined
->(undefined);
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export function ThemeProvider({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>("system");
-  const [dark, setDark] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const [dark, setDark] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  /* Load saved theme */
   useEffect(() => {
-    const saved =
-      (localStorage.getItem("theme") as Theme) || "system";
-
-    setThemeState(saved);
-    setMounted(true);
+    const savedTheme = localStorage.getItem("theme") as Theme | null;
+    if (savedTheme) {
+      setThemeState(savedTheme);
+    }
   }, []);
 
-  /* Apply theme */
   useEffect(() => {
-    if (!mounted) return;
+    const root = window.document.documentElement;
+    let isDark = true;
 
-    const root = document.documentElement;
-
-    root.classList.remove("dark");
-
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-
-    const isDark =
-      theme === "dark" ||
-      (theme === "system" && prefersDark);
-
-    if (isDark) {
-      root.classList.add("dark");
+    if (theme === "system") {
+      isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    } else {
+      isDark = theme === "dark";
     }
 
     setDark(isDark);
-    localStorage.setItem("theme", theme);
-  }, [theme, mounted]);
+
+    if (isDark) {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
+  }, [theme]);
 
   const setTheme = (newTheme: Theme) => {
     setThemeState(newTheme);
+    localStorage.setItem("theme", newTheme);
   };
 
-  if (!mounted) return null;
-
   return (
-    <ThemeContext.Provider
-      value={{
-        theme,
-        setTheme,
-        dark,
-      }}
-    >
+    <ThemeContext.Provider value={{ theme, setTheme, dark, sidebarOpen, setSidebarOpen }}>
       {children}
     </ThemeContext.Provider>
   );
@@ -83,12 +59,8 @@ export function ThemeProvider({
 
 export function useTheme() {
   const context = useContext(ThemeContext);
-
   if (!context) {
-    throw new Error(
-      "useTheme must be used inside ThemeProvider"
-    );
+    throw new Error("useTheme must be used within a ThemeProvider");
   }
-
   return context;
 }

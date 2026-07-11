@@ -1,0 +1,145 @@
+export const tonNFTs = [
+  {
+    name: "Telegram Gifts NFT System",
+    chain: "TON",
+    category: "Collectibles",
+    supply: 0,
+    description: "NFT-based gifts integrated inside Telegram ecosystem",
+    knownFor: "Social gifting + collectible digital items",
+    year: 2023,
+    twitter: "https://x.com/telegram",
+    rarity: "legendary"
+  },
+  {
+    name: "TON Diamonds Gifts",
+    chain: "TON",
+    category: "Collectibles",
+    supply: 0,
+    description: "Premium Telegram gift NFTs used as digital collectibles",
+    knownFor: "In-app Telegram collectible economy",
+    year: 2023,
+    twitter: "https://x.com/telegram",
+    rarity: "rare"
+  },
+  {
+    name: "TON Diamonds Collection Ecosystem",
+    chain: "TON",
+    category: "Collectibles",
+    supply: 0,
+    description: "Telegram-native collectible NFT system",
+    knownFor: "Gift-based NFT trading inside Telegram",
+    year: 2024,
+    twitter: "https://x.com/telegram",
+    rarity: "rare"
+  },
+  {
+    name: "TON Punks",
+    chain: "TON",
+    category: "PFP",
+    supply: 10000,
+    description: "Punk-style NFT collection on TON blockchain",
+    knownFor: "Early TON PFP culture experiment",
+    year: 2022,
+    twitter: "https://x.com/ton_blockchain",
+    rarity: "rare"
+  },
+  {
+    name: "TON Ape Club",
+    chain: "TON",
+    category: "PFP",
+    supply: 10000,
+    description: "Ape-themed NFT collection on TON",
+    knownFor: "Community-driven TON identity NFTs",
+    year: 2023,
+    twitter: "https://x.com/ton_blockchain",
+    rarity: "rare"
+  },
+  {
+    name: "TON DNS NFT Domains",
+    chain: "TON",
+    category: "Collectibles",
+    supply: 0,
+    description: "NFT-based domain names on TON blockchain",
+    knownFor: "Web3 identity and naming system",
+    year: 2022,
+    twitter: "https://x.com/ton_blockchain",
+    rarity: "legendary"
+  },
+  {
+    name: "Fragment Username NFTs",
+    chain: "TON",
+    category: "Collectibles",
+    supply: 0,
+    description: "Telegram username NFTs sold via Fragment",
+    knownFor: "Social identity ownership on Telegram",
+    year: 2022,
+    twitter: "https://x.com/fragmentcom",
+    rarity: "legendary"
+  },
+  {
+    name: "Getgems NFT Platform Assets",
+    chain: "TON",
+    category: "Collectibles",
+    supply: 0,
+    description: "Main NFT marketplace on TON blockchain",
+    knownFor: "Primary TON NFT trading hub",
+    year: 2022,
+    twitter: "https://x.com/getgemsdotio",
+    rarity: "legendary"
+  },
+  {
+    name: "TON Mini App NFT Assets",
+    chain: "TON",
+    category: "Gaming",
+    supply: 0,
+    description: "NFTs used inside Telegram mini-app games",
+    knownFor: "Game-based NFT utility ecosystem",
+    year: 2023,
+    twitter: "https://x.com/ton_blockchain",
+    rarity: "rare"
+  },
+  {
+    name: "TON Collectibles (Telegram Stickers NFTs)",
+    chain: "TON",
+    category: "Collectibles",
+    supply: 0,
+    description: "Sticker-based NFT collectibles inside Telegram ecosystem",
+    knownFor: "Social media NFT collectibles",
+    year: 2023,
+    twitter: "https://x.com/telegram",
+    rarity: "rare"
+  },
+  {
+    name: "Fragment NFT Auctions System",
+    chain: "TON",
+    category: "Collectibles",
+    supply: 0,
+    description: "Auction system for Telegram usernames and digital assets",
+    knownFor: "Identity trading marketplace",
+    year: 2022,
+    twitter: "https://x.com/fragmentcom",
+    rarity: "legendary"
+  },
+  {
+    name: "TON GameFi Mini App NFTs",
+    chain: "TON",
+    category: "Gaming",
+    supply: 0,
+    description: "NFT assets used inside Telegram-based mini games",
+    knownFor: "Tap-to-earn and mini-game NFT economy",
+    year: 2024,
+    twitter: "https://x.com/ton_blockchain",
+    rarity: "rare"
+  },
+  {
+    name: "TON Community Badge NFTs",
+    chain: "TON",
+    category: "Collectibles",
+    supply: 0,
+    description: "NFT badges for TON community contributors",
+    knownFor: "Contributor recognition system",
+    year: 2023,
+    twitter: "https://x.com/ton_blockchain",
+    rarity: "rare"
+  },
+];

@@ -1,0 +1,32 @@
+export const abstractNFTs = [
+  {
+    name: "Abstract Founders",
+    chain: "Abstract",
+    category: "PFP",
+    supply: 10000,
+    description: "The genesis NFT collection on Abstract chain, representing early adopters and builders of the ecosystem",
+    knownFor: "First major collection on Abstract L2",
+    year: 2024,
+    twitter: "https://x.com/AbstractChain",
+  },
+  {
+    name: "Pengu on Abstract",
+    chain: "Abstract",
+    category: "PFP",
+    supply: 8888,
+    description: "Pudgy Penguins ecosystem expansion to Abstract chain",
+    knownFor: "Major IP bridging to Abstract",
+    year: 2024,
+    twitter: "https://x.com/AbstractChain",
+  },
+  {
+    name: "Abstract Dreamers",
+    chain: "Abstract",
+    category: "Collectibles",
+    supply: 5000,
+    description: "A creative collectible series celebrating the Abstract ecosystem's vision of consumer crypto",
+    knownFor: "Community-driven collectible culture on Abstract",
+    year: 2024,
+    twitter: "https://x.com/AbstractChain",
+  },
+];

@@ -1,26 +1,7 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-
-const isPublicRoute = createRouteMatcher([
-  "/",
-  "/search",
-  "/ai",
-  "/submit",
-  "/settings",
-  "/help",
-  "/about",
-
-  // API routes
-  "/api/ai(.*)",
-  "/api/nfts(.*)",
-  "/api/search(.*)",
-
-  // Auth routes
-  "/sign-in(.*)",
-  "/sign-up(.*)",
-]);
+import { clerkMiddleware } from "@clerk/nextjs/server";
 
 export default clerkMiddleware(async (auth, req) => {
-  if (!isPublicRoute(req)) {
+  if (req.nextUrl.pathname.startsWith("/favorites")) {
     await auth.protect();
   }
 });

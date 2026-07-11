@@ -1,0 +1,32 @@
+export const apechainNFTs = [
+  {
+    name: "ApeChain Apes",
+    chain: "ApeChain",
+    category: "PFP",
+    supply: 10000,
+    description: "The native ape-themed NFT collection on ApeChain, the Arbitrum Orbit L3 built for the APE ecosystem",
+    knownFor: "ApeChain genesis community collection",
+    year: 2024,
+    twitter: "https://x.com/apechain",
+  },
+  {
+    name: "Curtis by ApeChain",
+    chain: "ApeChain",
+    category: "PFP",
+    supply: 7777,
+    description: "A flagship character collection on ApeChain with native yield mechanics",
+    knownFor: "Native yield NFT innovation on ApeChain",
+    year: 2024,
+    twitter: "https://x.com/apechain",
+  },
+  {
+    name: "ApeCoin Staking Badges",
+    chain: "ApeChain",
+    category: "Collectibles",
+    supply: 0,
+    description: "NFT badges for ApeCoin stakers on the ApeChain ecosystem",
+    knownFor: "Staking reward identity layer",
+    year: 2024,
+    twitter: "https://x.com/apechain",
+  },
+];

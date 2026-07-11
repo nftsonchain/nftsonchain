@@ -4,9 +4,7 @@ import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
-import BottomNav from "@/components/BottomNav";
-import SidePanel from "@/components/SidePanel";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, AlertCircle, UploadCloud, Info } from "lucide-react";
 import { useTheme } from "@/context/theme-context";
 
 const CHAINS = [
@@ -40,14 +38,8 @@ const MARKETPLACES = [
 export default function SubmitPage() {
   const { user } = useUser();
   const router = useRouter();
-  const { theme } = useTheme();
+  const { dark } = useTheme();
 
-  const dark =
-    theme === "dark" ||
-    theme === "light" ||
-    theme === "system";
-
-  const [menuOpen, setMenuOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -71,7 +63,6 @@ export default function SubmitPage() {
     >
   ) => {
     const { name, value } = e.target;
-
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -126,146 +117,155 @@ export default function SubmitPage() {
     }
   };
 
-  return (
-    <main
-      className={
-        dark
-          ? "bg-[#0B0F1A] text-white min-h-screen"
-          : "bg-white text-black min-h-screen"
-      }
-    >
-      <Navbar
-        onMenuClick={() => setMenuOpen(true)}
-        search={search}
-        setSearch={setSearch}
-      />
+  const pageBg = dark
+    ? "bg-[#0B0F1A] text-white min-h-screen"
+    : "bg-[#FAFAFA] text-black min-h-screen";
 
-      <div
-        className="
-          w-full
-          h-[calc(100vh-80px)]
-          overflow-y-auto
-          px-6 md:px-16 lg:px-28
-          py-10
-          pb-56
-        "
-      >
+  const cardStyle = dark
+    ? "border-white/10 bg-[#0e1424]/80 shadow-[0_8px_30px_rgba(0,0,0,0.15)]"
+    : "border-black/[0.08] bg-white shadow-[0_8px_30px_rgba(0,0,0,0.04)]";
+
+  return (
+    <main className={pageBg}>
+      <Navbar search={search} setSearch={setSearch} />
+
+      <div className="max-w-4xl mx-auto px-6 py-12 pb-36">
+        
+        {/* SUBMISSION SUCCESSFUL BANNER */}
         {submitted && (
-          <div className="p-8 rounded-2xl mb-10 flex items-center gap-5 border bg-green-500/10 border-green-500/30">
-            <CheckCircle className="w-8 h-8 text-green-400" />
+          <div className="p-6 rounded-2xl mb-10 flex items-start gap-4 border bg-green-500/10 border-green-500/30 text-green-400">
+            <CheckCircle className="w-5 h-5 shrink-0 mt-0.5" />
             <div>
-              <p className="font-bold text-green-400 text-xl">
-                Submission Received!
-              </p>
-              <p className="text-base text-white/70">
-                Your NFT will be reviewed and published soon.
+              <p className="font-bold text-sm">Submission Received successfully!</p>
+              <p className="text-xs opacity-80 mt-1">
+                Your NFT collection data has been queued for curator review. Redirecting to submissions overview...
               </p>
             </div>
           </div>
         )}
 
         {!submitted && (
-          <div className="max-w-6xl mx-auto">
-            <div className="mb-12">
-              <h1 className="text-5xl md:text-6xl font-bold text-[#FFCC00] mb-4">
-                Submit NFT Collection
+          <div className="space-y-10">
+            
+            {/* HEADER */}
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#FFCC00]/20 bg-[#FFCC00]/10 text-xs font-bold text-[#FFCC00] uppercase tracking-wider">
+                <UploadCloud className="w-3.5 h-3.5" />
+                <span>Submit Collection</span>
+              </div>
+              <h1 className="text-3xl md:text-4xl font-black tracking-tight leading-none">
+                Submit an <span className="bg-gradient-to-r from-[#FFCC00] to-yellow-500 bg-clip-text text-transparent">NFT Collection</span>
               </h1>
-
-              <p className="text-xl text-white/60 max-w-3xl">
-                Help us discover and list new NFT projects in the ecosystem.
+              <p className={`text-sm ${dark ? "text-white/60" : "text-black/60"}`}>
+                Help us keep our multi-chain directory up to date by submitting new, exciting, or culturally significant collections.
               </p>
             </div>
 
             {error && (
-              <div className="p-5 mb-8 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-lg">
-                {error}
+              <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs flex gap-2 items-center">
+                <AlertCircle className="w-4 h-4 shrink-0" />
+                <span>{error}</span>
               </div>
             )}
 
-            <form
-              onSubmit={handleSubmit}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-12"
-            >
-              <div className="space-y-8">
-                <Input
-                  label="Collection Name *"
-                  dark={dark}
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  placeholder="Bored Ape Yacht Club"
-                />
+            {/* FORM WRAPPER */}
+            <form onSubmit={handleSubmit} className={`p-8 rounded-2xl border ${cardStyle} space-y-8`}>
+              
+              {/* PRIMARY METADATA */}
+              <div className="space-y-2">
+                <h3 className="text-sm font-bold tracking-wide uppercase text-[#FFCC00]/80">Primary Information</h3>
+                <div className="grid sm:grid-cols-2 gap-5">
+                  <Input
+                    label="Collection Name *"
+                    dark={dark}
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    placeholder="Bored Ape Yacht Club"
+                  />
 
-                <Select
-                  label="Chain *"
-                  dark={dark}
-                  name="chain"
-                  value={formData.chain}
-                  options={CHAINS}
-                  onChange={handleInputChange}
-                />
+                  <Select
+                    label="Chain *"
+                    dark={dark}
+                    name="chain"
+                    value={formData.chain}
+                    options={CHAINS}
+                    onChange={handleInputChange}
+                  />
 
-                <Select
-                  label="Category"
-                  dark={dark}
-                  name="category"
-                  value={formData.category}
-                  options={CATEGORIES}
-                  onChange={handleInputChange}
-                />
+                  <Select
+                    label="Category"
+                    dark={dark}
+                    name="category"
+                    value={formData.category}
+                    options={CATEGORIES}
+                    onChange={handleInputChange}
+                  />
 
-                <Input
-                  label="Total Supply"
-                  dark={dark}
-                  name="supply"
-                  value={formData.supply}
-                  onChange={handleInputChange}
-                  placeholder="10000"
-                />
+                  <Input
+                    label="Total Supply"
+                    dark={dark}
+                    name="supply"
+                    value={formData.supply}
+                    onChange={handleInputChange}
+                    placeholder="10000"
+                  />
+                </div>
               </div>
 
-              <div className="space-y-8">
-                <Input
-                  label="Launch Year"
-                  dark={dark}
-                  name="launchYear"
-                  value={formData.launchYear}
-                  onChange={handleInputChange}
-                />
+              <hr className={dark ? "border-white/5" : "border-black/5"} />
 
-                <Input
-                  label="Official X"
-                  dark={dark}
-                  name="officialX"
-                  value={formData.officialX}
-                  onChange={handleInputChange}
-                  placeholder="@handle"
-                />
+              {/* DETAILS & COMMUNITY LINKS */}
+              <div className="space-y-2">
+                <h3 className="text-sm font-bold tracking-wide uppercase text-[#FFCC00]/80">Launch & Community Links</h3>
+                <div className="grid sm:grid-cols-2 gap-5">
+                  <Input
+                    label="Launch Year"
+                    dark={dark}
+                    name="launchYear"
+                    value={formData.launchYear}
+                    onChange={handleInputChange}
+                  />
 
-                <Input
-                  label="Website"
-                  dark={dark}
-                  name="officialWebsite"
-                  value={formData.officialWebsite}
-                  onChange={handleInputChange}
-                  placeholder="https://example.com"
-                />
+                  <Input
+                    label="Official X"
+                    dark={dark}
+                    name="officialX"
+                    value={formData.officialX}
+                    onChange={handleInputChange}
+                    placeholder="@handle"
+                  />
 
-                <Textarea
-                  label="Description"
-                  dark={dark}
-                  name="description"
-                  value={formData.description}
-                  onChange={handleInputChange}
-                />
+                  <Input
+                    label="Official Website"
+                    dark={dark}
+                    name="officialWebsite"
+                    value={formData.officialWebsite}
+                    onChange={handleInputChange}
+                    placeholder="https://example.com"
+                  />
+
+                  <div className="sm:col-span-2">
+                    <Textarea
+                      label="Collection Description"
+                      dark={dark}
+                      name="description"
+                      value={formData.description}
+                      onChange={handleInputChange}
+                      placeholder="Give a brief summary of the collection story, founders, and cultural background..."
+                    />
+                  </div>
+                </div>
               </div>
 
-              <div className="lg:col-span-2 mt-4">
-                <label className="block text-lg font-semibold mb-6">
+              <hr className={dark ? "border-white/5" : "border-black/5"} />
+
+              {/* MARKETPLACES CHECKS */}
+              <div className="space-y-3">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-[#FFCC00]/85">
                   Available Marketplaces
                 </label>
-
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-2.5">
                   {MARKETPLACES.map((m) => {
                     const active = formData.marketplaces.includes(m);
 
@@ -274,12 +274,12 @@ export default function SubmitPage() {
                         key={m}
                         type="button"
                         onClick={() => handleMarketplaceToggle(m)}
-                        className={`px-7 py-4 rounded-full text-base font-semibold transition border ${
+                        className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all border ${
                           active
-                            ? "bg-[#FFCC00] text-black scale-105"
+                            ? "bg-[#FFCC00] text-black border-[#FFCC00] shadow-sm transform scale-[1.02]"
                             : dark
-                            ? "bg-white/10 text-white border-white/10"
-                            : "bg-black/10 text-black border-black/10"
+                            ? "bg-white/5 text-white/80 border-white/5 hover:bg-white/10 hover:border-white/10"
+                            : "bg-black/5 text-black/80 border-black/5 hover:bg-black/10 hover:border-black/10"
                         }`}
                       >
                         {m}
@@ -289,43 +289,34 @@ export default function SubmitPage() {
                 </div>
               </div>
 
-              <div className="lg:col-span-2 mt-10 mb-10">
+              <div className="pt-4">
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-5 rounded-2xl font-bold text-xl bg-[#FFCC00] text-black hover:bg-yellow-300 transition disabled:opacity-50"
+                  className="w-full py-4 rounded-xl font-bold text-sm bg-[#FFCC00] text-black hover:bg-[#FFEE00] transition-all duration-300 transform hover:scale-[1.005] disabled:opacity-50 shadow-md shadow-[#FFCC00]/10"
                 >
-                  {loading ? "Submitting..." : "Submit Collection"}
+                  {loading ? "Submitting to network..." : "Submit NFT Collection"}
                 </button>
               </div>
 
-              <div className="h-20 lg:h-32" />
             </form>
           </div>
         )}
       </div>
-
-      <SidePanel
-        open={menuOpen}
-        onClose={() => setMenuOpen(false)}
-        dark={dark}
-      />
-
-      <BottomNav dark={dark} />
     </main>
   );
 }
 
 function Input({ label, dark, ...props }: any) {
   return (
-    <div>
-      <label className="block text-lg font-semibold mb-3">{label}</label>
+    <div className="space-y-1.5">
+      <label className={`block text-[11px] font-semibold uppercase tracking-wider ${dark ? "text-white/50" : "text-black/50"}`}>{label}</label>
       <input
         {...props}
-        className={`w-full p-5 rounded-2xl border text-lg ${
+        className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition duration-200 ${
           dark
-            ? "bg-white/10 border-white/10 text-white"
-            : "bg-black/10 border-black/10 text-black"
+            ? "bg-white/5 border-white/5 text-white placeholder-white/30 focus:border-[#FFCC00]/40 focus:bg-white/[0.07]"
+            : "bg-black/5 border-black/5 text-black placeholder-black/30 focus:border-[#FFCC00]/40 focus:bg-black/[0.07]"
         }`}
       />
     </div>
@@ -334,20 +325,19 @@ function Input({ label, dark, ...props }: any) {
 
 function Select({ label, options, dark, ...props }: any) {
   return (
-    <div>
-      <label className="block text-lg font-semibold mb-3">{label}</label>
+    <div className="space-y-1.5">
+      <label className={`block text-[11px] font-semibold uppercase tracking-wider ${dark ? "text-white/50" : "text-black/50"}`}>{label}</label>
       <select
         {...props}
-        className={`w-full p-5 rounded-2xl border text-lg ${
+        className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition duration-200 cursor-pointer ${
           dark
-            ? "bg-white/10 border-white/10 text-white"
-            : "bg-black/10 border-black/10 text-black"
+            ? "bg-[#0e1424] border-white/5 text-white focus:border-[#FFCC00]/40"
+            : "bg-white border-black/5 text-black focus:border-[#FFCC00]/40"
         }`}
       >
-        <option value="">Select</option>
-
+        <option value="" className={dark ? "bg-[#0e1424]" : "bg-white"}>Select Blockchain</option>
         {options.map((o: string) => (
-          <option key={o} value={o}>
+          <option key={o} value={o} className={dark ? "bg-[#0e1424]" : "bg-white"}>
             {o}
           </option>
         ))}
@@ -358,15 +348,15 @@ function Select({ label, options, dark, ...props }: any) {
 
 function Textarea({ label, dark, ...props }: any) {
   return (
-    <div>
-      <label className="block text-lg font-semibold mb-3">{label}</label>
+    <div className="space-y-1.5">
+      <label className={`block text-[11px] font-semibold uppercase tracking-wider ${dark ? "text-white/50" : "text-black/50"}`}>{label}</label>
       <textarea
         {...props}
-        rows={6}
-        className={`w-full p-5 rounded-2xl border text-lg ${
+        rows={4}
+        className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition duration-200 ${
           dark
-            ? "bg-white/10 border-white/10 text-white"
-            : "bg-black/10 border-black/10 text-black"
+            ? "bg-white/5 border-white/5 text-white placeholder-white/30 focus:border-[#FFCC00]/40 focus:bg-white/[0.07]"
+            : "bg-black/5 border-black/5 text-black placeholder-black/30 focus:border-[#FFCC00]/40 focus:bg-black/[0.07]"
         }`}
       />
     </div>

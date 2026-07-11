@@ -1,0 +1,12 @@
+<svg viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="256" height="256" rx="32" fill="transparent"/>
+  <defs>
+    <linearGradient id="blastg" x1="72" y1="72" x2="184" y2="184" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FF4D4D"/>
+      <stop offset="100%" stop-color="#FFB800"/>
+    </linearGradient>
+  </defs>
+  <circle cx="128" cy="128" r="92" fill="url(#blastg)"/>
+  <path d="M96 136L128 80L160 136H136L128 104L120 136H96Z" fill="#FFFFFF"/>
+  <path d="M96 168L128 120L160 168H136L128 140L120 168H96Z" fill="#FFFFFF" opacity="0.6"/>
+</svg>

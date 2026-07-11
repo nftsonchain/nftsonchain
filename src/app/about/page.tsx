@@ -3,8 +3,6 @@
 import { useState } from "react";
 import { useTheme } from "@/context/theme-context";
 import Navbar from "@/components/Navbar";
-import BottomNav from "@/components/BottomNav";
-import SidePanel from "@/components/SidePanel";
 import {
   Zap,
   Search,
@@ -12,6 +10,10 @@ import {
   Share2,
   Heart,
   Lightbulb,
+  ShieldAlert,
+  ArrowRight,
+  TrendingUp,
+  Globe2,
 } from "lucide-react";
 
 interface FeatureItem {
@@ -22,40 +24,34 @@ interface FeatureItem {
 
 const FEATURES: FeatureItem[] = [
   {
-    icon: <Search className="w-10 h-10" />,
-    title: "Discover",
-    description:
-      "Explore thousands of NFT collections across multiple blockchains",
+    icon: <Search className="w-6 h-6 text-[#FFCC00]" />,
+    title: "Cross-Chain Discovery",
+    description: "Explore collections and creators across all major blockchains in a unified space.",
   },
   {
-    icon: <BookOpen className="w-10 h-10" />,
-    title: "Learn",
-    description:
-      "Get educated about NFTs through our AI assistant and resources",
+    icon: <BookOpen className="w-6 h-6 text-[#FFCC00]" />,
+    title: "Educational Hub",
+    description: "Understand blockchain networks, mechanisms, and key concepts through our interactive resources.",
   },
   {
-    icon: <Share2 className="w-10 h-10" />,
-    title: "Share",
-    description:
-      "Submit and share your favorite NFT projects with the community",
+    icon: <Share2 className="w-6 h-6 text-[#FFCC00]" />,
+    title: "Creator Submissions",
+    description: "Submit, feature, and showcase new NFT collections to a global community of collectors.",
   },
   {
-    icon: <Heart className="w-10 h-10" />,
-    title: "Engage",
-    description:
-      "Like collections and add favorites to build your personal collection",
+    icon: <Heart className="w-6 h-6 text-[#FFCC00]" />,
+    title: "Personalized Spaces",
+    description: "Organize collections, like favorite projects, and track items without custodian issues.",
   },
   {
-    icon: <Lightbulb className="w-10 h-10" />,
-    title: "Explore",
-    description:
-      "Understand blockchain ecosystems and NFT culture across chains",
+    icon: <Lightbulb className="w-6 h-6 text-[#FFCC00]" />,
+    title: "Insightful Assistant",
+    description: "Converse with our built-in assistant to parse complicated Web3 structures in seconds.",
   },
   {
-    icon: <Zap className="w-10 h-10" />,
-    title: "Connect",
-    description:
-      "Join the global NFT community and connect with like-minded enthusiasts",
+    icon: <Zap className="w-6 h-6 text-[#FFCC00]" />,
+    title: "Lightweight Engine",
+    description: "No heavy integrations or transactions. Pure discovery at blazing fast speeds.",
   },
 ];
 
@@ -65,7 +61,7 @@ const SUPPORTED_CHAINS = [
   "Bitcoin",
   "Cosmos",
   "TON",
-  "XRP",
+  "XRP Ledger",
   "Polygon",
   "Base",
   "Cardano",
@@ -73,133 +69,106 @@ const SUPPORTED_CHAINS = [
 
 export default function AboutPage() {
   const { dark } = useTheme();
-  const [menuOpen, setMenuOpen] = useState(false);
   const [search, setSearch] = useState("");
 
+  const pageBg = dark
+    ? "bg-[#0B0F1A] text-white min-h-screen"
+    : "bg-[#FAFAFA] text-black min-h-screen";
+
+  const cardStyle = dark
+    ? "border-white/10 bg-white/[0.03] shadow-[0_8px_30px_rgba(0,0,0,0.15)]"
+    : "border-black/[0.08] bg-white shadow-[0_8px_30px_rgba(0,0,0,0.04)]";
+
   return (
-    <main
-      className={
-        dark
-          ? "bg-[#0B0F1A] text-white min-h-screen"
-          : "bg-white text-black min-h-screen"
-      }
-    >
-      <Navbar
-        onMenuClick={() => setMenuOpen(true)}
-        search={search}
-        setSearch={setSearch}
-      />
+    <main className={pageBg}>
+      <Navbar search={search} setSearch={setSearch} />
 
-      {/* EXPANDED MAIN CONTAINER */}
-      <div className="max-w-7xl mx-auto px-8 md:px-14 py-16 pb-36">
-        {/* HEADER */}
-        <div className="mb-20 max-w-4xl">
-          <h1 className="text-6xl font-bold mb-6 text-[#FFCC00] tracking-tight">
-            About NFTs OnChain
+      <div className="max-w-6xl mx-auto px-6 md:px-10 py-16 pb-36">
+        
+        {/* HERO SECTION */}
+        <div className="text-center max-w-3xl mx-auto mb-20 space-y-6">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#FFCC00]/20 bg-[#FFCC00]/10 text-xs font-bold text-[#FFCC00] uppercase tracking-wider">
+            <span>About The Platform</span>
+          </div>
+          <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-none">
+            Welcome to <span className="bg-gradient-to-r from-[#FFCC00] to-yellow-500 bg-clip-text text-transparent">NFTs OnChain</span>
           </h1>
-
-          <p
-            className={`text-2xl leading-relaxed ${
-              dark ? "text-white/80" : "text-black/80"
-            }`}
-          >
-            Discover the future of NFT exploration, education, and community.
+          <p className={`text-base md:text-lg leading-relaxed ${dark ? "text-white/60" : "text-black/60"}`}>
+            We build the clean discovery Layer for the cross-chain NFT ecosystem. No wallets required. No complex setups. Just smooth exploration.
           </p>
         </div>
 
-        {/* MISSION */}
-        <div
-          className={`p-12 rounded-2xl mb-16 ${
-            dark ? "bg-white/5" : "bg-black/5"
-          }`}
-        >
-          <h2 className="text-4xl font-bold mb-6 text-[#FFCC00]">
-            Our Mission
-          </h2>
+        {/* MISSION & VISION */}
+        <div className="grid md:grid-cols-2 gap-8 mb-16">
+          <div className={`p-8 rounded-2xl border ${cardStyle} transition-all duration-300 hover:shadow-lg`}>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 rounded-lg bg-[#FFCC00]/10 text-[#FFCC00]">
+                <Globe2 className="w-5 h-5" />
+              </div>
+              <h2 className="text-xl font-bold tracking-tight">Our Mission</h2>
+            </div>
+            <p className={`text-sm leading-relaxed ${dark ? "text-white/70" : "text-black/70"}`}>
+              NFTs OnChain is built to bridge the gap between blockchain ecosystems. Our mission is to lower the barrier of entry for exploration and discovery, providing high-quality indexing, statistics, and details on communities across all chain landscapes.
+            </p>
+          </div>
 
-          <p
-            className={`text-xl leading-loose ${
-              dark ? "text-white/80" : "text-black/80"
-            }`}
-          >
-            NFTs OnChain is a cross-chain NFT discovery and education platform
-            built to help users explore NFT culture, learn blockchain concepts,
-            and connect with the global NFT community. We believe NFTs are more
-            than digital art — they represent culture, community, and innovation.
+          <div className={`p-8 rounded-2xl border ${cardStyle} transition-all duration-300 hover:shadow-lg`}>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 rounded-lg bg-[#FFCC00]/10 text-[#FFCC00]">
+                <TrendingUp className="w-5 h-5" />
+              </div>
+              <h2 className="text-xl font-bold tracking-tight">Our Vision</h2>
+            </div>
+            <p className={`text-sm leading-relaxed ${dark ? "text-white/70" : "text-black/70"}`}>
+              To become the ultimate starting point for collectors, creators, and builders looking to browse NFT landscapes across blockchains, while acting as an educational engine that demystifies multi-chain technology.
+            </p>
+          </div>
+        </div>
+
+        {/* PROHIBITIONS LIST (WHAT WE ARE NOT) */}
+        <div className={`p-8 rounded-2xl border mb-16 ${cardStyle}`}>
+          <h2 className="text-xl font-bold tracking-tight mb-2 text-[#FFCC00]">Platform Parameters</h2>
+          <p className={`text-xs mb-6 ${dark ? "text-white/40" : "text-black/40"}`}>
+            To prevent user confusion, we maintain explicit platform boundaries.
           </p>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {[
+              "Not an NFT Marketplace or exchange",
+              "We do NOT execute trades, transfers, or transactions",
+              "We do NOT request seed phrases or direct assets access",
+              "Not a portfolio or wallet balance tracker",
+              "We do NOT provide financial or investment recommendations",
+            ].map((text, i) => (
+              <div key={i} className="flex items-start gap-3">
+                <span className="text-red-500/80 text-sm font-bold shrink-0 mt-0.5">✕</span>
+                <span className={`text-sm ${dark ? "text-white/80" : "text-black/80"}`}>{text}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* VISION */}
-        <div
-          className={`p-12 rounded-2xl mb-16 ${
-            dark ? "bg-white/5" : "bg-black/5"
-          }`}
-        >
-          <h2 className="text-4xl font-bold mb-6 text-[#FFCC00]">
-            Our Vision
-          </h2>
-
-          <p
-            className={`text-xl leading-loose ${
-              dark ? "text-white/80" : "text-black/80"
-            }`}
-          >
-            To become the leading NFT discovery platform where users can
-            explore, understand, and engage with NFT projects across all major
-            blockchains.
-          </p>
-        </div>
-
-        {/* WHAT WE ARE NOT */}
-        <div
-          className={`p-12 rounded-2xl mb-16 border ${
-            dark ? "border-white/10 bg-white/5" : "border-black/10 bg-black/5"
-          }`}
-        >
-          <h2 className="text-4xl font-bold mb-6 text-[#FFCC00]">
-            What We're NOT
-          </h2>
-
-          <ul
-            className={`space-y-5 text-xl ${
-              dark ? "text-white/80" : "text-black/80"
-            }`}
-          >
-            <li>❌ We are NOT an NFT marketplace</li>
-            <li>❌ We do NOT execute trades or transactions</li>
-            <li>❌ We do NOT provide financial advice</li>
-            <li>❌ We do NOT offer trading signals</li>
-            <li>❌ We are NOT a wallet platform</li>
-          </ul>
-        </div>
-
-        {/* FEATURES */}
+        {/* FEATURES GRID */}
         <div className="mb-20">
-          <h2 className="text-4xl font-bold mb-10 text-[#FFCC00]">
-            What We Offer
-          </h2>
+          <div className="text-center mb-10 space-y-2">
+            <h2 className="text-2xl font-bold tracking-tight">What We Offer</h2>
+            <p className={`text-xs uppercase tracking-widest ${dark ? "text-white/40" : "text-black/40"}`}>
+              Engineered features for Web3 discovery
+            </p>
+          </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {FEATURES.map((feature, index) => (
               <div
                 key={index}
-                className={`p-8 rounded-2xl border transition ${
-                  dark
-                    ? "border-white/10 hover:border-white/20 bg-white/5"
-                    : "border-black/10 hover:border-black/20 bg-black/5"
-                }`}
+                className={`p-6 rounded-2xl border ${cardStyle} transition-all duration-300 hover:-translate-y-1 hover:shadow-lg`}
               >
-                <div className="mb-6 text-[#FFCC00]">{feature.icon}</div>
-
-                <h3 className="text-2xl font-semibold mb-4 text-[#FFCC00]">
+                <div className="p-3 rounded-xl bg-[#FFCC00]/10 w-fit mb-4">
+                  {feature.icon}
+                </div>
+                <h3 className="text-base font-bold mb-2 tracking-tight">
                   {feature.title}
                 </h3>
-
-                <p
-                  className={`text-lg leading-relaxed ${
-                    dark ? "text-white/70" : "text-black/70"
-                  }`}
-                >
+                <p className={`text-xs leading-relaxed ${dark ? "text-white/60" : "text-black/60"}`}>
                   {feature.description}
                 </p>
               </div>
@@ -208,23 +177,16 @@ export default function AboutPage() {
         </div>
 
         {/* SUPPORTED CHAINS */}
-        <div
-          className={`p-12 rounded-2xl mb-20 ${
-            dark ? "bg-white/5" : "bg-black/5"
-          }`}
-        >
-          <h2 className="text-4xl font-bold mb-8 text-[#FFCC00]">
-            Supported Blockchains
-          </h2>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+        <div className={`p-8 rounded-2xl border mb-16 ${cardStyle}`}>
+          <h2 className="text-xl font-bold tracking-tight mb-6 text-center">Supported Ecosystems</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {SUPPORTED_CHAINS.map((chain) => (
               <div
                 key={chain}
-                className={`p-5 rounded-xl text-center text-xl font-semibold ${
+                className={`p-3.5 rounded-xl border text-center text-xs font-semibold select-none transition ${
                   dark
-                    ? "bg-white/10 text-[#FFCC00]"
-                    : "bg-black/10 text-[#FFCC00]"
+                    ? "border-white/5 bg-white/[0.02] text-white/80 hover:border-[#FFCC00]/30 hover:text-white"
+                    : "border-black/5 bg-black/[0.01] text-black/80 hover:border-[#FFCC00]/40 hover:text-black"
                 }`}
               >
                 {chain}
@@ -234,80 +196,52 @@ export default function AboutPage() {
         </div>
 
         {/* WHY CHOOSE US */}
-        <div
-          className={`p-12 rounded-2xl mb-20 border-l-4 border-[#FFCC00] ${
-            dark ? "bg-white/5" : "bg-black/5"
-          }`}
-        >
-          <h2 className="text-4xl font-bold mb-6 text-[#FFCC00]">
-            Why Choose NFTs OnChain?
-          </h2>
-
-          <ul
-            className={`space-y-5 text-xl ${
-              dark ? "text-white/80" : "text-black/80"
-            }`}
-          >
-            <li>⚡ Fast & Lightweight</li>
-            <li>🌍 Cross-Chain Support</li>
-            <li>🎓 Educational AI Assistant</li>
-            <li>🤝 Community-Driven Discovery</li>
-            <li>🔒 Secure and Non-Custodial</li>
-          </ul>
+        <div className={`p-8 rounded-2xl border-l-4 border-[#FFCC00] ${cardStyle} mb-16`}>
+          <h2 className="text-lg font-bold tracking-tight mb-4">Core Principles</h2>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {[
+              "⚡ Fast, zero-loading overhead discovery",
+              "🌍 Truly chain-agnostic data modeling",
+              "🎓 Non-custodial search assistant integration",
+              "🤝 Open source creator-to-community showcase pipelines",
+            ].map((text, i) => (
+              <div key={i} className={`text-sm ${dark ? "text-white/70" : "text-black/70"}`}>
+                {text}
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* DISCLAIMER */}
-        <div
-          className={`p-8 rounded-2xl mb-14 border ${
-            dark
-              ? "border-yellow-500/30 bg-yellow-500/10"
-              : "border-yellow-600/30 bg-yellow-100"
-          }`}
-        >
-          <h3
-            className={`text-2xl font-semibold mb-4 ${
-              dark ? "text-yellow-400" : "text-yellow-700"
-            }`}
-          >
-            ⚠ Important Disclaimer
-          </h3>
-
-          <p
-            className={`text-lg leading-relaxed ${
-              dark ? "text-yellow-300/80" : "text-yellow-700/80"
-            }`}
-          >
-            NFTs OnChain provides educational content only. Nothing here is
-            financial, legal, or investment advice. Always DYOR.
-          </p>
+        <div className={`p-6 rounded-2xl border ${
+          dark
+            ? "border-yellow-500/20 bg-yellow-500/[0.04] text-yellow-200/90"
+            : "border-yellow-600/20 bg-yellow-50/70 text-yellow-800/90"
+        } flex gap-4 items-start mb-14`}>
+          <ShieldAlert className="w-5 h-5 shrink-0 mt-0.5 text-[#FFCC00]" />
+          <div>
+            <h3 className="text-sm font-bold mb-1">Important Disclaimer</h3>
+            <p className="text-xs leading-relaxed opacity-80">
+              NFTs OnChain provides information for cultural indexing and educational discovery only. Nothing displayed on this platform constitutes financial, legal, or investment advice. Always execute independent research before exploring projects.
+            </p>
+          </div>
         </div>
 
         {/* CTA */}
-        <div className="text-center pt-6">
-          <p
-            className={`mb-6 text-2xl ${
-              dark ? "text-white/80" : "text-black/80"
-            }`}
-          >
-            Ready to explore the NFT world?
+        <div className="text-center pt-6 space-y-4">
+          <p className={`text-sm font-medium ${dark ? "text-white/60" : "text-black/60"}`}>
+            Ready to explore the multi-chain ecosystem?
           </p>
-
           <a
             href="/"
-            className="inline-block px-10 py-5 rounded-xl font-semibold text-xl bg-[#FFCC00] text-black hover:bg-[#FFEE00] transition"
+            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm bg-[#FFCC00] text-black hover:bg-[#FFEE00] transition-all duration-300 transform hover:scale-[1.02] shadow-lg shadow-[#FFCC00]/10"
           >
-            Start Exploring
+            <span>Start Exploring</span>
+            <ArrowRight className="w-4 h-4" />
           </a>
         </div>
+
       </div>
-
-      <SidePanel
-        open={menuOpen}
-        onClose={() => setMenuOpen(false)}
-        dark={dark}
-      />
-
-      <BottomNav dark={dark} />
     </main>
   );
 }

@@ -19,7 +19,11 @@ export default function Marketplaces({ dark }: Props) {
             key={`first-${marketplace.name}`}
             className="flex items-center gap-3 flex-shrink-0"
           >
-            <span className="text-2xl">{marketplace.icon}</span>
+            <div
+              className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold bg-[#FFCC00] text-black"
+            >
+              {marketplace.name.charAt(0)}
+            </div>
 
             <span
               className={`text-sm font-semibold tracking-wide ${
@@ -36,7 +40,11 @@ export default function Marketplaces({ dark }: Props) {
             key={`second-${marketplace.name}`}
             className="flex items-center gap-3 flex-shrink-0"
           >
-            <span className="text-2xl">{marketplace.icon}</span>
+            <div
+              className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold bg-[#FFCC00] text-black"
+            >
+              {marketplace.name.charAt(0)}
+            </div>
 
             <span
               className={`text-sm font-semibold tracking-wide ${

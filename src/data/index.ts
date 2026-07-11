@@ -17,7 +17,7 @@ import { immutableNFTs } from "./immutable";
 import { cosmosNFTs } from "./cosmos";
 import { bitcoinNFTs } from "./bitcoin";
 import { waxNFTs } from "./wax";
-import { gramNFTs } from "./gram";
+import { tonNFTs } from "./ton";
 import { injectiveNFTs } from "./injective";
 import { seiNFTs } from "./sei";
 import { celestiaNFTs } from "./celestia";
@@ -31,6 +31,20 @@ import { eosNFTs } from "./eos";
 import { hederaNFTs } from "./hedera";
 import { zilliqaNFTs } from "./zilliqa";
 import { algorandNFTs } from "./algorand";
+
+// New chains added in Phase 1
+import { abstractNFTs } from "./abstract";
+import { apechainNFTs } from "./apechain";
+import { blastNFTs } from "./blast";
+import { suiNFTs } from "./sui";
+import { aptosNFTs } from "./aptos";
+import { berachainNFTs } from "./berachain";
+import { mantleNFTs } from "./mantle";
+import { roninNFTs } from "./ronin";
+import { shapeNFTs } from "./shape";
+import { lineaNFTs } from "./linea";
+import { zksyncNFTs } from "./zksync";
+import { xionNFTs } from "./xion";
 
 export const allNFTs = [
   ...ethereumNFTs,
@@ -49,7 +63,7 @@ export const allNFTs = [
   ...cosmosNFTs,
   ...bitcoinNFTs,
   ...waxNFTs,
-  ...gramNFTs,
+  ...tonNFTs,
   ...injectiveNFTs,
   ...seiNFTs,
   ...celestiaNFTs,
@@ -63,4 +77,17 @@ export const allNFTs = [
   ...hederaNFTs,
   ...zilliqaNFTs,
   ...algorandNFTs,
+  
+  ...abstractNFTs,
+  ...apechainNFTs,
+  ...blastNFTs,
+  ...suiNFTs,
+  ...aptosNFTs,
+  ...berachainNFTs,
+  ...mantleNFTs,
+  ...roninNFTs,
+  ...shapeNFTs,
+  ...lineaNFTs,
+  ...zksyncNFTs,
+  ...xionNFTs,
 ] as NFT[];

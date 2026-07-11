@@ -4,8 +4,6 @@ import { useState, useRef, useEffect } from "react";
 import { Send, Loader } from "lucide-react";
 import { useTheme } from "@/context/theme-context";
 import Navbar from "@/components/Navbar";
-import BottomNav from "@/components/BottomNav";
-import SidePanel from "@/components/SidePanel";
 
 interface Message {
   id: string;
@@ -28,7 +26,6 @@ export default function AIPage() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const { dark } = useTheme();
-  const [menuOpen, setMenuOpen] = useState(false);
   const [search, setSearch] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -102,7 +99,6 @@ export default function AIPage() {
       }
     >
       <Navbar
-        onMenuClick={() => setMenuOpen(true)}
         search={search}
         setSearch={setSearch}
       />
@@ -246,14 +242,6 @@ export default function AIPage() {
 
         </div>
       </div>
-
-      <SidePanel
-        open={menuOpen}
-        onClose={() => setMenuOpen(false)}
-        dark={dark}
-      />
-
-      <BottomNav dark={dark} />
     </main>
   );
 }
