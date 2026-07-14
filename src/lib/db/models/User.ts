@@ -39,7 +39,4 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Create unique index on username
-userSchema.index({ username: 1 }, { unique: true });
-
 export const User = mongoose.models.User || mongoose.model("User", userSchema);
